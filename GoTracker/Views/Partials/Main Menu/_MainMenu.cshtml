@@ -1,0 +1,58 @@
+﻿@{
+    Layout = null;
+}
+<div class="responsive-admin-menu">
+    <div class="responsive-menu">
+        ORB
+        <div class="menuicon"><i class="fa fa-angle-down"></i></div>
+    </div>
+    <ul id="menu">
+        <li><a href="@Url.Action("Index", "Home")" title="Gerenciamento"><i class="fa fa-home"></i><span> Gerenciamento</span></a></li>
+        <li><a href="@Url.Action("Index", "Home")" title="Mapa" ><i class="entypo-globe"></i><span> Mapa</span></a></li>
+        <li><a href="#" title="Front End"><i class="glyphicon glyphicon-list-alt"></i><span> Grid de Posições </span></a></li>
+        <li><a href="admin-inbox.html" title="Eventos"><i class="entypo-bell"></i><span> Eventos <span class="badge">32</span></span></a></li>
+        <li><a href="#" title="Comandos" data-id="widgets-sub"><i class="glyphicon glyphicon-send"></i><span> Comandos</span></a></li>
+        <li>
+            <a href="#" class="submenu" data-id="tables-sub" title="Relatorios"><i class="fa fa-table"></i><span> Relatórios</span></a>
+            <!-- Tables Sub-Menu -->
+            <ul id="tables-sub" class="accordion">
+                <li><a href="admin-tables.html" title="Timeline"><i class="fa fa-table"></i><span> Tables</span></a></li>
+                <li><a href="admin-datatables.html" title="Profile"><i class="entypo-database"></i><span> Datatables</span></a></li>
+            </ul>
+        </li>
+        <!-- <li>
+            <a class="submenu" href="#" data-id="other-sub" title="Other Contents"><i class="fa fa-th"></i><span> Forms</span></a>
+            <ul id="other-sub" class="accordion">
+                <li><a href="admin-forms.html" title="Forms"><i class="fa fa-th"></i><span> Forms</span></a></li>
+                <li><a href="admin-forms-bootstrap.html" title="Bootstrap Forms"><i class="fa fa-table"></i><span> Bootstrap Forms</span></a></li>
+                <li><a href="admin-forms-plugins.html" title="Forms Plugins"><i class="fa fa-puzzle-piece"></i><span> Form Plugins</span></a></li>
+                <li><a href="admin-forms-validation.html" title="Forms Validation"><i class="fa fa-check-circle"></i><span> Form Validation</span></a></li>
+                <li><a href="admin-forms-wizard.html" title="Forms Wizard"><i class="fa fa-magic"></i><span> Form Wizard</span></a></li>
+            </ul>    
+        </li> --> 
+       <li>
+            <a class="submenu" href="#" title="Graficos" data-id="graph-sub"><i class="entypo-chart-area"></i><span> Gráficos</span></a>
+            <!-- Graph and Charts Menu -->
+            <ul id="graph-sub" class="accordion">
+                <li><a href="admin-chart-morris.html" title="Video Gallery"><i class="entypo-chart-bar"></i><span> Morris Charts</span></a></li>
+                <li><a href="admin-chart-flot.html" title="Photo Gallery"><i class="entypo-chart-line"></i><span> Flot Charts</span></a></li>
+                <li><a href="admin-chart-others.html" title="Photo Gallery"><i class="entypo-chart-pie"></i><span> Others Charts</span></a></li>
+            </ul>
+        <li>
+            <a class="submenu" href="#" data-id="interface-sub" title="Cadastro"><i class="entypo-user-add"></i><span> Cadastro</span></a>
+            <!-- Interface Sub-Menu -->
+            <ul id="interface-sub" class="accordion">
+                <li><a href="admin-typography.html" title="Usuário"><i class="entypo-user"></i><span> Usuário</span></a></li>
+                <li><a href="admin-nestable.html" title="Cliente"><i class="fa fa-building" ></i><span> Cliente</span></a></li>
+                <li><a href="admin-tree-view.html" title="Equipamento"><i class="fa fa-hdd-o" ></i><span> Equipamento</span></a></li>
+                <li><a href="admin-components.html" title="Veículo"><i class="fa fa-car"></i><span> Veículo</span></a></li>
+                <li><a href="admin-elements.html" title="Motorista"><i class="fa fa-male"></i><span> Motorista</span></a></li>
+                <li><a href="admin-animation.html" title="Sim Card"><i class="fa fa-mobile"></i><span> Sim Card</span></a></li>
+                <!-- <li><a href="admin-buttons.html" title="Items List"><i class="entypo-list"></i><span> Buttons</span></a></li>  -->            
+            </ul>
+        </li>          
+        <!-- Other Contents Menu -->
+        <li><a href="#" title="Front End"><i class="entypo-cog"></i><span> Configurações</span></a></li>
+    </ul>
+</div>
+

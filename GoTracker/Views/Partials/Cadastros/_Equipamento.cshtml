@@ -1,0 +1,69 @@
+﻿@{
+    Layout = null;
+}
+<div class="row" id="powerwidgets">
+    <div class="col-md-6 bootstrap-grid">
+        <!-- New widget -->
+        <div class="powerwidget green" id="checkout-form-validation-widget" data-widget-editbutton="false">
+            <header>
+                <h2>Cadastrar<small>Equipamentos</small></h2>
+            </header>
+            <div class="inner-spacer" role="content">
+                <form action="demo-checkout-process.php" id="checkout-form" class="orb-form">
+                    <header>Novo Equipamento</header>
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-10">
+                                <label class="input">
+                                    <i class="icon-prepend fa fa-user"></i>
+                                    <input type="text" name="cliente" placeholder="Cliente">
+                                    <b class="tooltip tooltip-bottom-right">Cliente Responsável pelo Equipamento</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend glyphicon glyphicon-barcode"></i>
+                                    <input type="email" name="serial" placeholder="Número de Série">
+                                    <b class="tooltip tooltip-bottom-right">Serial do Equipamento</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="select">
+                                    <select name="tipoEquipamento">
+                                        <option value="0" selected="" disabled="">Modelo do Equipamento</option>
+                                        <option value="1">Afghanistan</option>
+                                        <option value="2">Albania</option>
+                                        <option value="3">Algeria</option>
+                                        <option value="4">American Samoa</option>
+                                        <option value="5">Andorra</option>
+                                        <option value="6">Angola</option>
+                                        <option value="7">Anguilla</option>
+                                    </select>
+                                    <i></i>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend glyphicon glyphicon-transfer"></i>
+                                    <input type="text" name="Chip" placeholder="Chip">
+                                    <b class="tooltip tooltip-bottom-right">Chip Utilizado no Equipamento</b>
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                    <footer>
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+        <!-- /End Widget -->
+
+    </div>
+</div>

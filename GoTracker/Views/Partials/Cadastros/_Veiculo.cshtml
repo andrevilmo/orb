@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+}
+<div class="row" id="powerwidgets">
+    <div class="col-md-6 bootstrap-grid">
+        <!-- New widget -->
+        <div class="powerwidget red" id="checkout-form-validation-widget" data-widget-editbutton="false">
+            <header>
+                <h2>Cadastrar<small>Veículos</small></h2>
+            </header>
+            <div class="inner-spacer" role="content">
+                <form action="demo-checkout-process.php" id="checkout-form" class="orb-form">
+                    <header>Novo Veículo</header>
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-10">
+                                <label class="input">
+                                    <i class="icon-prepend fa fa-user"></i>
+                                    <input type="text" name="cliente" placeholder="Cliente">
+                                    <b class="tooltip tooltip-bottom-right">Cliente Responsável pelo Equipamento</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend glyphicon glyphicon-barcode"></i>
+                                    <input type="email" name="equipamento" placeholder="Equipamento Associado">
+                                    <b class="tooltip tooltip-bottom-right">Equipamento do Veículo</b>
+                                </label>
+                            </section>
+                        </div>                    
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend glyphicon glyphicon-transfer"></i>
+                                    <input type="text" name="código" placeholder="Código do Veículo">
+                                    <b class="tooltip tooltip-bottom-right">Código de identificação</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend glyphicon glyphicon-transfer"></i>
+                                    <input type="text" name="descricao" placeholder="Descrição">
+                                    <b class="tooltip tooltip-bottom-right">Descrição do Veículo</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend glyphicon glyphicon-transfer"></i>
+                                    <input type="text" name="motorista" placeholder="Motorista Associado">
+                                    <b class="tooltip tooltip-bottom-right">Motorista do Veículo</b>
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                    <footer>
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+        <!-- /End Widget -->
+
+    </div>
+</div>

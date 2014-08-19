@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @Scripts.Render("~/Template/JQuery")
+    @Styles.Render("~/Template/Basic/css")
+    @Scripts.Render("~/Template/Basic/js")
+    @Scripts.Render("~/Template/JQueryUi")
+
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+</head>
+<body>
+    
+    <!--Smooth Scroll-->
+    <div class="smooth-overflow">
+        <!--Navigation-->
+        @Html.Partial("~/Views/Partials/Navigation/_Navigation.cshtml")
+        <!--/Navigation-->
+        <!--MainWrapper-->
+        <div class="main-wrap">
+            <!--OffCanvas Menu -->
+            @Html.Partial("~/Views/Partials/OffCanvas Menu/_OffCanvasMenu.cshtml")
+            <!-- /Offcanvas user menu-->
+            <!--Main Menu-->
+            @Html.Partial("~/Views/Partials/Main Menu/_MainMenu.cshtml")
+            <!--/MainMenu-->
+            <!--Content Wrapper-->
+            <div class="content-wrapper">
+
+                <!--Horizontal Dropdown-->
+                @Html.Partial("~/Views/Partials/Horizontal Dropdown/_HorizontalDropdown.cshtml")
+                <!--/Horizontal Dropdown-->
+                <!--Breadcrumb-->
+                @Html.Partial("~/Views/Partials/Breadcrumb/_Breadcrumb.cshtml")
+                <!--/Breadcrumb-->
+                <!--Jumbotron-->
+                @*@Html.Partial("~/Views/Partials/Jumbotron/_Jumbotron.cshtml")*@
+                <!--/Jumbotron-->
+                <!-- Body Start -->
+                @RenderBody()
+                <!-- Body End -->
+                <!-- End grid -->
+
+            </div>
+            <!-- / Content Wrapper -->
+        </div>
+        <!--/MainWrapper-->
+    </div>
+    <!-- /offcanvas-->
+    <!-- Modals -->
+    @Html.Partial("~/Views/Partials/Modal/_Modals.cshtml")
+
+    <!--Scripts-->
+
+    @Scripts.Render("~/Template/Fullscreen")
+    @Scripts.Render("~/Template/Nanoscroller")
+    @Scripts.Render("~/Template/Sparkline")
+    @Scripts.Render("~/Template/HorizontalDropdown")
+    @Scripts.Render("~/Template/PowerWidgets")
+    @Scripts.Render("~/Template/FlotChart")
+    @Scripts.Render("~/Template/Bootstrap")
+    @Scripts.Render("~/Template/ToDo")
+    @Scripts.Render("~/Template/MainApp")
+    @Scripts.Render("~/Template/GoogleMaps")
+    @Scripts.Render("~/Template/Forms")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

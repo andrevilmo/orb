@@ -1,0 +1,75 @@
+﻿@{
+    Layout = null;
+}
+<div class="row" id="powerwidgets">
+    <div class="col-md-6 bootstrap-grid">
+        <!-- New widget -->
+        <div class="powerwidget yellow" id="checkout-form-validation-widget" data-widget-editbutton="false">
+            <header>
+                <h2>Cadastrar<small>SimCards</small></h2>
+            </header>
+            <div class="inner-spacer" role="content">
+                <form action="demo-checkout-process.php" id="checkout-form" class="orb-form">
+                    <header>Novo Sim Card</header>
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-3">
+                                <label class="input">
+                                    <i class="icon-prepend fa fa-phone"></i>
+                                    <input type="email" name="ddd" placeholder="DDD">
+                                </label>
+                            </section>
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-append fa fa-phone"></i>
+                                    <input type="tel" name="telefone" placeholder="telefone">
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend glyphicon glyphicon-barcode"></i>
+                                    <input type="email" name="pin" placeholder="PIN">
+                                    <b class="tooltip tooltip-bottom-right">PIN do Chip</b>
+                                </label>
+                            </section>
+                        </div>
+
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend glyphicon glyphicon-barcode"></i>
+                                    <input type="email" name="puk" placeholder="PUK">
+                                    <b class="tooltip tooltip-bottom-right">PUK do Chip</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-9">
+                                <label class="input">
+                                    <i class="icon-prepend glyphicon glyphicon-transfer"></i>
+                                    <input type="text" name="iccid" placeholder="ICCID">
+                                    <b class="tooltip tooltip-bottom-right">ICCID do Chip</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-5">
+                                <label class="input">
+                                    <i class="icon-prepend glyphicon glyphicon-transfer"></i>
+                                    <input type="text" name="plano" placeholder="Plano de Dados">
+                                    <b class="tooltip tooltip-bottom-right">Plano de Dados do Chip</b>
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                    <footer>
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+        <!-- /End Widget -->
+    </div>
+</div>
