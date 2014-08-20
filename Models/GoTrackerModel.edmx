@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="GoTrackerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="GoTrackerModelTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="GoTrackerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="GoTrackerModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Equipamentoes" EntityType="GoTrackerModel.Equipamento" />
+          <EntitySet Name="Clientes" EntityType="GoTrackerModel.Cliente" />
+          <AssociationSet Name="ClienteCliente" Association="GoTrackerModel.ClienteCliente">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Cliente1" EntitySet="Clientes" />
+          </AssociationSet>
+          <EntitySet Name="Motoristas" EntityType="GoTrackerModel.Motorista" />
+          <EntitySet Name="SimCards" EntityType="GoTrackerModel.SimCard" />
+          <EntitySet Name="Usuarios" EntityType="GoTrackerModel.Usuario" />
+          <EntitySet Name="Veiculoes" EntityType="GoTrackerModel.Veiculo" />
+          <AssociationSet Name="SimCardEquipamento" Association="GoTrackerModel.SimCardEquipamento">
+            <End Role="SimCard" EntitySet="SimCards" />
+            <End Role="Equipamento" EntitySet="Equipamentoes" />
+          </AssociationSet>
+          <AssociationSet Name="EquipamentoVeiculo" Association="GoTrackerModel.EquipamentoVeiculo">
+            <End Role="Equipamento" EntitySet="Equipamentoes" />
+            <End Role="Veiculo" EntitySet="Veiculoes" />
+          </AssociationSet>
+          <AssociationSet Name="MotoristaVeiculo" Association="GoTrackerModel.MotoristaVeiculo">
+            <End Role="Motorista" EntitySet="Motoristas" />
+            <End Role="Veiculo" EntitySet="Veiculoes" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioCliente" Association="GoTrackerModel.UsuarioCliente">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Cliente" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="ClienteVeiculo" Association="GoTrackerModel.ClienteVeiculo">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Veiculo" EntitySet="Veiculoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Equipamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroSerie" Type="Undefined" Nullable="false" />
+          <Property Name="Modelo" Type="Undefined" Nullable="false" />
+          <Property Name="SimCardId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="Undefined" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="GoTrackerModel.ClienteCliente" FromRole="Cliente" ToRole="Cliente1" />
+          <NavigationProperty Name="ClientePai" Relationship="GoTrackerModel.ClienteCliente" FromRole="Cliente1" ToRole="Cliente" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="GoTrackerModel.UsuarioCliente" FromRole="Cliente" ToRole="Usuario" />
+          <NavigationProperty Name="Veiculos" Relationship="GoTrackerModel.ClienteVeiculo" FromRole="Cliente" ToRole="Veiculo" />
+        </EntityType>
+        <Association Name="ClienteCliente">
+          <End Type="GoTrackerModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="GoTrackerModel.Cliente" Role="Cliente1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cliente1">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Motorista">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="Undefined" Nullable="false" />
+          <Property Name="NumeroDOC" Type="Undefined" Nullable="false" />
+          <Property Name="CategoriaCNH" Type="Undefined" Nullable="false" />
+          <Property Name="Sobrenome" Type="Undefined" Nullable="false" />
+          <Property Name="VencimentoCNH" Type="Undefined" Nullable="false" />
+          <Property Name="Email" Type="Undefined" Nullable="false" />
+          <Property Name="Telefone" Type="Undefined" Nullable="false" />
+          <Property Name="Celular" Type="Undefined" Nullable="false" />
+          <NavigationProperty Name="Veiculos" Relationship="GoTrackerModel.MotoristaVeiculo" FromRole="Motorista" ToRole="Veiculo" />
+        </EntityType>
+        <EntityType Name="SimCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DDD" Type="Undefined" Nullable="false" />
+          <Property Name="Telefone" Type="Undefined" Nullable="false" />
+          <Property Name="PIN" Type="Undefined" Nullable="false" />
+          <Property Name="PUK" Type="Undefined" Nullable="false" />
+          <Property Name="ICCID" Type="Undefined" Nullable="false" />
+          <Property Name="PlanoDados" Type="Undefined" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="Undefined" Nullable="false" />
+          <Property Name="SobreNome" Type="Undefined" Nullable="false" />
+          <Property Name="Login" Type="Undefined" Nullable="false" />
+          <Property Name="Senha" Type="Undefined" Nullable="false" />
+          <Property Name="Email" Type="Undefined" Nullable="false" />
+          <Property Name="Telefone" Type="Undefined" Nullable="false" />
+          <Property Name="Celular" Type="Undefined" Nullable="false" />
+          <Property Name="DataSuspensao" Type="Undefined" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="GoTrackerModel.UsuarioCliente" FromRole="Usuario" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="Veiculo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" Nullable="false" />
+          <Property Name="Descricao" Type="Undefined" Nullable="false" />
+          <NavigationProperty Name="Equipamento" Relationship="GoTrackerModel.EquipamentoVeiculo" FromRole="Veiculo" ToRole="Equipamento" />
+          <NavigationProperty Name="Motorista" Relationship="GoTrackerModel.MotoristaVeiculo" FromRole="Veiculo" ToRole="Motorista" />
+          <Property Name="MotoristaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="GoTrackerModel.ClienteVeiculo" FromRole="Veiculo" ToRole="Cliente" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="SimCardEquipamento">
+          <End Type="GoTrackerModel.SimCard" Role="SimCard" Multiplicity="1" />
+          <End Type="GoTrackerModel.Equipamento" Role="Equipamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SimCard">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Equipamento">
+              <PropertyRef Name="SimCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipamentoVeiculo">
+          <End Type="GoTrackerModel.Equipamento" Role="Equipamento" Multiplicity="1" />
+          <End Type="GoTrackerModel.Veiculo" Role="Veiculo" Multiplicity="0..1" />
+        </Association>
+        <Association Name="MotoristaVeiculo">
+          <End Type="GoTrackerModel.Motorista" Role="Motorista" Multiplicity="1" />
+          <End Type="GoTrackerModel.Veiculo" Role="Veiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Motorista">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Veiculo">
+              <PropertyRef Name="MotoristaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsuarioCliente">
+          <End Type="GoTrackerModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <End Type="GoTrackerModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+        </Association>
+        <Association Name="ClienteVeiculo">
+          <End Type="GoTrackerModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="GoTrackerModel.Veiculo" Role="Veiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Veiculo">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="GoTrackerModel" />
+        <Alias Key="Target" Value="GoTrackerModel.Store" />
+        <EntityContainerMapping CdmEntityContainer="GoTrackerModelContainer" StorageEntityContainer="GoTrackerModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
