@@ -354,6 +354,12 @@
     <Content Include="Views\Partials\Navigation\_Navigation.cshtml" />
     <Content Include="Views\Partials\OffCanvas Menu\_OffCanvasMenu.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\Cadastros\_Perfil.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\Cadastros\_Cliente.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

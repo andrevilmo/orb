@@ -1,0 +1,128 @@
+﻿@{
+    Layout = null;
+}
+<div class="row" id="powerwidgets">
+    <div class="col-md-6 bootstrap-grid">
+        <!-- New widget -->
+        <div class="powerwidget red" id="checkout-form-validation-widget" data-widget-editbutton="false">
+            <header>
+                <h2>Cadastrar<small>Clientes</small></h2>
+            </header>
+            <div class="inner-spacer" role="content">
+                <form action="demo-checkout-process.php" id="checkout-form" class="orb-form">
+                    <header>Novo Cliente</header>
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-10">
+                                <label class="input">
+                                    <i class="icon-prepend glyphicon glyphicon-briefcase"></i>
+                                    <input type="text" name="clientePai" placeholder="Cliente Pai">
+                                    <b class="tooltip tooltip-bottom-right">Cliente Responsável</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend glyphicon glyphicon-barcode"></i>
+                                    <input type="text" name="serial" placeholder="Código do Cliente">
+                                    <b class="tooltip tooltip-right">Código de Identificação do Cliente</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-10">
+                                <label class="input">
+                                    <i class="icon-prepend entypo-vcard"></i>
+                                    <input type="text" name="nome" placeholder="Nome do Cliente">
+                                    <b class="tooltip tooltip-right">Nome do Cliente</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend entypo-doc-text"></i>
+                                    <input type="text" name="nome" placeholder="CNPJ do Cliente">
+                                    <b class="tooltip tooltip-right">CNPJ do Cliente</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-10">
+                                <label class="input">
+                                    <i class="icon-prepend entypo-mail"></i>
+                                    <input type="email" name="email" placeholder="Email do Cliente">
+                                    <b class="tooltip tooltip-bottom-right">Email do Cliente</b>
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                    <header role="heading">
+                        <h5>Informações Adicionais</h5>
+                    </header>
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend entypo-phone"></i>
+                                    <input type="tel" name="telefone" placeholder="Telefone de Contato">
+                                    <b class="tooltip tooltip-right">Telefone de Contato do Cliente</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-10">
+                                <label class="input">
+                                    <i class="icon-prepend glyphicon entypo-home"></i>
+                                    <input type="tel" name="logadouro" placeholder="Logadouro">
+                                    <b class="tooltip tooltip-right">Logadouro</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend entypo-map"></i>
+                                    <input type="tel" name="cidade" placeholder="Cidade">
+                                    <b class="tooltip tooltip-right">Cidade</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend entypo-map"></i>
+                                    <input type="tel" name="estado" placeholder="Estado">
+                                    <b class="tooltip tooltip-right">Estado</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-8">
+                                <label class="input">
+                                    <i class="icon-prepend entypo-network"></i>
+                                    <input type="tel" name="website" placeholder="Website">
+                                    <b class="tooltip tooltip-bottom-right">Website</b>
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <section>
+                            <label class="label">Observações</label>
+                            <label class="textarea">
+                                <textarea rows="3"></textarea>
+                            </label>
+                            <div class="note"><strong>Note:</strong> Observações sobre o cliente, se necessário.</div>
+                        </section>
+                    </fieldset>
+                    <footer>
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+        <!-- /End Widget -->
+    </div>
+</div>
