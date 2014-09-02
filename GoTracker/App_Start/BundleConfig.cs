@@ -25,8 +25,8 @@ namespace GoTracker
             //Styles
 
             bundles.Add(new StyleBundle("~/Template/Basic/css").Include(
-                "~/Content/Template/css/styles.css"));
-
+                "~/Content/Template/css/styles.css").Include(
+                "~/Content/Template/css/magicsuggest.css"));
 
             //Javascripts
 
@@ -47,10 +47,9 @@ namespace GoTracker
             //Fullscreen
             bundles.Add(new ScriptBundle("~/Template/Fullscreen").Include(
                 "~/Content/Template/js/vendors/fullscreen/screenfull.min.js"));
-
+            
             //Nanoscroller
             bundles.Add(new ScriptBundle("~/Template/Nanoscroller").Include(
-                "~/Content/Template/js/vendors/nanoscroller/jquery.nanoscroller.min.map",
                 "~/Content/Template/js/vendors/nanoscroller/jquery.nanoscroller.min.js"));
 
             //Sparkline
@@ -99,6 +98,15 @@ namespace GoTracker
             "~/Content/Template/js/vendors/forms/jquery.validate.min.js",
             "~/Content/Template/js/vendors/forms/jquery.maskedinput.min.js",
             "~/Content/Template/js/vendors/jquery-steps/jquery.steps.min.js"));
+
+             bundles.Add(new ScriptBundle("~/Template/Knockout").Include(
+            "~/scripts/knockout-3.0.0.js",
+            "~/scripts/knockout.combobox-1.0.71.0.js",
+            "~/scripts/knockout.mapping-latest.js",
+            "~/scripts/knockout.pager.js",
+            "~/scripts/knockout.simpleGrid.3.0.js",
+            "~/scripts/magicsuggest.js"));
+
         }
     }
 }

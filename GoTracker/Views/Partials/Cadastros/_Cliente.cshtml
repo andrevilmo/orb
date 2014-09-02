@@ -2,31 +2,39 @@
     Layout = null;
 }
 <div class="row" id="powerwidgets">
-    <div class="col-md-6 bootstrap-grid">
+    <div class="col-md-12 bootstrap-grid">
         <!-- New widget -->
-        <div class="powerwidget green powerwidget-sortable" id="registration-form-validation-widget" data-widget-editbutton="false" role="widget" style="">
+        <div class="powerwidget green powerwidget-sortable" id="registration-form-validation-widget" data-widget-editbutton="false" title="Cadastro de Clientes" role="widget" style="">
             <header role="heading">
-                <h2>Cadastrar<small>Cliente</small></h2>
-                <div class="powerwidget-ctrls" role="menu"><a href="#" class="button-icon powerwidget-fullscreen-btn"><i class="fa fa-arrows-alt "></i></a><a href="#" class="button-icon powerwidget-edit-btn"><i class="fa fa-cog"></i></a> <a href="#" class="button-icon powerwidget-toggle-btn"><i class="fa fa-chevron-circle-up "></i></a></div><span class="powerwidget-loader"></span>
+                <h2>Cadastro de clientes</h2>
+                <div class="powerwidget-ctrls row" role="menu">
+                    <a href="#" class="button-icon powerwidget-fullscreen-btn"><i class="fa fa-arrows-alt "></i></a>
+                    <a href="#" class="button-icon powerwidget-edit-btn"><i class="fa fa-cog"></i></a>
+                    <a href="#" class="button-icon powerwidget-toggle-btn"><i class="fa fa-chevron-circle-up "></i></a>
+
+                </div>
+                <span class="powerwidget-loader"></span>
             </header>
-            <div class="inner-spacer" role="content">
+            <div class="inner-spacer" role="content" data-bind="if: IsSelected">
                 <form action="demo-checkout-process.php" id="checkout-form" class="orb-form">
-                    <header>Novo Cliente</header>
+                    <header><span data-bind="text: Selected().Nome"></span></header>
                     <fieldset>
                         <div class="row">
                             <section class="col col-10">
                                 <label class="input">
                                     <i class="icon-prepend glyphicon glyphicon-briefcase"></i>
-                                    <input type="text" name="clientePai" placeholder="Cliente Pai">
+                                    <input type="text" id="clientePai" name="clientePai" readonly disabled data-bind="value: Pai()?Pai().Nome:''" placeholder="Cliente Pai">
+
                                     <b class="tooltip tooltip-bottom-right">Cliente Responsável</b>
                                 </label>
+                                <div id="divSelPai" placeholder="Selecione/troque o cliente Pai ->" data-bind="Select: Pai,ValueField:'Nome',SetField:'Pai', SelectableItems: items,DisplayField: 'Nome' "></div>
                             </section>
                         </div>
                         <div class="row">
                             <section class="col col-6">
                                 <label class="input">
                                     <i class="icon-prepend glyphicon glyphicon-barcode"></i>
-                                    <input type="text" name="serial" placeholder="Código do Cliente">
+                                    <input type="text" name="serial" data-bind="value: Selected().ClienteId,valueUpdate:'afterkeydown'" placeholder="Código do Cliente">
                                     <b class="tooltip tooltip-right">Código de Identificação do Cliente</b>
                                 </label>
                             </section>
@@ -35,7 +43,7 @@
                             <section class="col col-10">
                                 <label class="input">
                                     <i class="icon-prepend entypo-vcard"></i>
-                                    <input type="text" name="nome" placeholder="Nome do Cliente">
+                                    <input type="text" data-bind="value: Selected().Nome,valueUpdate:'afterkeydown'" name="nome" placeholder="Nome do Cliente">
                                     <b class="tooltip tooltip-right">Nome do Cliente</b>
                                 </label>
                             </section>
@@ -44,7 +52,7 @@
                             <section class="col col-6">
                                 <label class="input">
                                     <i class="icon-prepend entypo-doc-text"></i>
-                                    <input type="text" name="nome" placeholder="CNPJ do Cliente">
+                                    <input type="text" name="nome" data-bind="value: Selected().CNPJ,valueUpdate:'afterkeydown'" placeholder="CNPJ do Cliente">
                                     <b class="tooltip tooltip-right">CNPJ do Cliente</b>
                                 </label>
                             </section>
@@ -53,7 +61,7 @@
                             <section class="col col-10">
                                 <label class="input">
                                     <i class="icon-prepend entypo-mail"></i>
-                                    <input type="email" name="email" placeholder="Email do Cliente">
+                                    <input type="email" data-bind="value: Selected().Email,valueUpdate:'afterkeydown'" name="email" placeholder="Email do Cliente">
                                     <b class="tooltip tooltip-bottom-right">Email do Cliente</b>
                                 </label>
                             </section>
@@ -67,7 +75,7 @@
                             <section class="col col-6">
                                 <label class="input">
                                     <i class="icon-prepend entypo-phone"></i>
-                                    <input type="tel" name="telefone" placeholder="Telefone de Contato">
+                                    <input type="tel" data-bind="value: Selected().Telefone,valueUpdate:'afterkeydown'" name="telefone" placeholder="Telefone de Contato">
                                     <b class="tooltip tooltip-right">Telefone de Contato do Cliente</b>
                                 </label>
                             </section>
@@ -76,7 +84,7 @@
                             <section class="col col-10">
                                 <label class="input">
                                     <i class="icon-prepend glyphicon entypo-home"></i>
-                                    <input type="tel" name="logadouro" placeholder="Logadouro">
+                                    <input type="tel" name="logadouro" data-bind="value: Selected().Logradouro,valueUpdate:'afterkeydown'" placeholder="Logadouro">
                                     <b class="tooltip tooltip-right">Logadouro</b>
                                 </label>
                             </section>
@@ -85,7 +93,7 @@
                             <section class="col col-6">
                                 <label class="input">
                                     <i class="icon-prepend entypo-map"></i>
-                                    <input type="tel" name="cidade" placeholder="Cidade">
+                                    <input type="tel" data-bind="value: Selected().Cidade,valueUpdate:'afterkeydown'" name="cidade" placeholder="Cidade">
                                     <b class="tooltip tooltip-right">Cidade</b>
                                 </label>
                             </section>
@@ -94,8 +102,10 @@
                             <section class="col col-6">
                                 <label class="input">
                                     <i class="icon-prepend entypo-map"></i>
-                                    <input type="tel" name="estado" placeholder="Estado">
+                                    <input type="tel" readonly disabled data-bind="value: Selected().Estado" old-data-bind="value: Selected().Estado,valueUpdate:'afterkeydown'" name="estado" placeholder="Estado">
                                     <b class="tooltip tooltip-right">Estado</b>
+
+                                    <div id="divSelEstado" placeholder="Selecione/troque o estado ->" data-bind="Select: Selected?Selected().Estado:'',SetField:'Estado',ValueField:'Nome', SelectableItems: [{Nome:'RS'},{Nome:'SC'}],DisplayField: 'Nome' "></div>
                                 </label>
                             </section>
                         </div>
@@ -103,7 +113,7 @@
                             <section class="col col-8">
                                 <label class="input">
                                     <i class="icon-prepend entypo-network"></i>
-                                    <input type="tel" name="website" placeholder="Website">
+                                    <input type="tel" name="website" data-bind="value: Selected().WebSite,valueUpdate:'afterkeydown'" placeholder="Website">
                                     <b class="tooltip tooltip-bottom-right">Website</b>
                                 </label>
                             </section>
@@ -113,7 +123,7 @@
                         <section>
                             <label class="label">Observações</label>
                             <label class="textarea">
-                                <textarea rows="3"></textarea>
+                                <textarea data-bind="value: Selected().Observacoes,valueUpdate:'afterkeydown'" rows="3"></textarea>
                             </label>
                             <div class="note"><strong>Note:</strong> Observações sobre o cliente, se necessário.</div>
                         </section>

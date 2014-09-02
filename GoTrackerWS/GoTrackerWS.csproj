@@ -7,7 +7,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C89A90A4-97D9-4697-B514-795C062B1673}</ProjectGuid>
+    <ProjectGuid>{E194988A-C5A2-4560-BB36-AB9DEB9F1B1E}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -41,10 +41,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -154,34 +151,51 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\ClienteController.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\EquipamentoController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\MotoristaController.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Controllers\SimCardController.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Controllers\UsuarioController.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Controllers\VeiculoController.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\GoTrackerModel.Designer.cs">
+    <Compile Include="Models\Cliente.cs">
+      <DependentUpon>GoTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Equipamento.cs">
+      <DependentUpon>GoTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GoTracker.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GoTrackerModel.edmx</DependentUpon>
+      <DependentUpon>GoTracker.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GoTrackerWSContext.cs">
-      <SubType>Code</SubType>
+    <Compile Include="Models\GoTracker.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GoTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GoTracker.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GoTracker.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Motorista.cs">
+      <DependentUpon>GoTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Perfil.cs">
+      <DependentUpon>GoTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SimCard.cs">
+      <DependentUpon>GoTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuario.cs">
+      <DependentUpon>GoTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Veiculo.cs">
+      <DependentUpon>GoTracker.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -194,6 +208,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Models\GoTracker.edmx.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -207,12 +222,22 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\GoTrackerModel.edmx">
+    <EntityDeploy Include="Models\GoTracker.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GoTrackerModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>GoTracker.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\GoTrackerModel.edmx.diagram">
-      <DependentUpon>GoTrackerModel.edmx</DependentUpon>
+    <Content Include="Models\GoTracker.edmx.diagram">
+      <DependentUpon>GoTracker.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\GoTracker.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GoTracker.Context.cs</LastGenOutput>
+      <DependentUpon>GoTracker.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\GoTracker.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GoTracker.cs</LastGenOutput>
+      <DependentUpon>GoTracker.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -237,7 +262,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -261,7 +288,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>11420</DevelopmentServerPort>
+          <DevelopmentServerPort>4360</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:9961/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

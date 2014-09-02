@@ -6,7 +6,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
@@ -22,11 +21,13 @@ namespace GoTrackerWS.Controllers
     using GoTrackerWS.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<Equipamento>("Equipamento");
+    builder.EntitySet<Veiculo>("Veiculo"); 
+    builder.EntitySet<SimCard>("SimCards"); 
     config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel());
     */
     public class EquipamentoController : ODataController
     {
-        private GoTrackerWSContext db = new GoTrackerWSContext();
+        private GoTrackerContainer db = new GoTrackerContainer();
 
         // GET odata/Equipamento
         [Queryable]
@@ -43,7 +44,7 @@ namespace GoTrackerWS.Controllers
         }
 
         // PUT odata/Equipamento(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] int key, Equipamento equipamento)
+        public IHttpActionResult Put([FromODataUri] int key, Equipamento equipamento)
         {
             if (!ModelState.IsValid)
             {
@@ -55,11 +56,11 @@ namespace GoTrackerWS.Controllers
                 return BadRequest();
             }
 
-            db.Entry(equipamento).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(equipamento).State = EntityState.Modified;
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -77,7 +78,7 @@ namespace GoTrackerWS.Controllers
         }
 
         // POST odata/Equipamento
-        public async Task<IHttpActionResult> Post(Equipamento equipamento)
+        public IHttpActionResult Post(Equipamento equipamento)
         {
             if (!ModelState.IsValid)
             {
@@ -85,21 +86,21 @@ namespace GoTrackerWS.Controllers
             }
 
             db.Equipamentoes.Add(equipamento);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return Created(equipamento);
         }
 
         // PATCH odata/Equipamento(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<Equipamento> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<Equipamento> patch)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            Equipamento equipamento = await db.Equipamentoes.FindAsync(key);
+            Equipamento equipamento = db.Equipamentoes.Find(key);
             if (equipamento == null)
             {
                 return NotFound();
@@ -109,7 +110,7 @@ namespace GoTrackerWS.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -127,18 +128,32 @@ namespace GoTrackerWS.Controllers
         }
 
         // DELETE odata/Equipamento(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] int key)
+        public IHttpActionResult Delete([FromODataUri] int key)
         {
-            Equipamento equipamento = await db.Equipamentoes.FindAsync(key);
+            Equipamento equipamento = db.Equipamentoes.Find(key);
             if (equipamento == null)
             {
                 return NotFound();
             }
 
             db.Equipamentoes.Remove(equipamento);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // GET odata/Equipamento(5)/Veiculoes
+        [Queryable]
+        public IQueryable<Veiculo> GetVeiculoes([FromODataUri] int key)
+        {
+            return db.Equipamentoes.Where(m => m.Id == key).SelectMany(m => m.Veiculoes);
+        }
+
+        // GET odata/Equipamento(5)/SimCard
+        [Queryable]
+        public SingleResult<SimCard> GetSimCard([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.Equipamentoes.Where(m => m.Id == key).Select(m => m.SimCard));
         }
 
         protected override void Dispose(bool disposing)

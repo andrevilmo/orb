@@ -9266,3 +9266,24 @@ code {
 .css .o,
 .css .o+.nt,
 .css .nt+.nt { color: #999 }
+
+.form-control {
+    border: 0px solid #c0c2c7 !important;
+}
+.ms-ctn-focus {
+    border-color: white !important;
+    box-shadow: none !important;  
+}
+.ms-ctn {
+    width: 50%;
+    margin-left: 46%;
+    margin-top: -4%;
+
+}
+
+.ko-grid tbody tr td {
+    cursor: pointer;
+}
+#powerwidgets {
+    visibility: hidden;
+}

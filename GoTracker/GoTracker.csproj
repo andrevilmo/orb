@@ -126,6 +126,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -185,6 +186,13 @@
     <Content Include="Content\Template\images\gallery\7.png" />
     <Content Include="Content\Template\images\gallery\8.png" />
     <Content Include="Content\Template\images\gallery\9.png" />
+    <Content Include="Content\Template\images\glyphicons_006_user_add.png" />
+    <Content Include="Content\Template\images\glyphicons_170_step_backward.png" />
+    <Content Include="Content\Template\images\glyphicons_171_fast_backward.png" />
+    <Content Include="Content\Template\images\glyphicons_172_rewind.png" />
+    <Content Include="Content\Template\images\glyphicons_176_forward.png" />
+    <Content Include="Content\Template\images\glyphicons_177_fast_forward.png" />
+    <Content Include="Content\Template\images\glyphicons_178_step_forward.png" />
     <Content Include="Content\Template\images\loading-small.gif" />
     <Content Include="Content\Template\images\loading.gif" />
     <Content Include="Content\Template\images\logo.png" />
@@ -263,6 +271,19 @@
     <Content Include="Content\Template\js\vendors\x-editable\typeahead.js" />
     <Content Include="Content\Template\js\vendors\x-editable\typeaheadjs.js" />
     <Content Include="Global.asax" />
+    <Content Include="scripts\knockout-3.0.0.debug.js" />
+    <Content Include="scripts\knockout-3.0.0.js" />
+    <Content Include="scripts\knockout.combobox-1.0.71.0.js" />
+    <Content Include="scripts\knockout.combobox-1.0.71.0.min.js" />
+    <Content Include="scripts\knockout.mapping-latest.debug.js" />
+    <Content Include="scripts\knockout.mapping-latest.js" />
+    <Content Include="scripts\knockout.pager.js" />
+    <Content Include="scripts\knockout.simpleGrid.3.0.js" />
+    <Content Include="scripts\koGrid-2.1.1.debug.js" />
+    <Content Include="scripts\koGrid-2.1.1.js" />
+    <Content Include="scripts\magicsuggest-min.js" />
+    <Content Include="scripts\magicsuggest.js" />
+    <Content Include="scripts\Views\Cliente.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -359,6 +380,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Partials\Cadastros\_Cliente.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Cliente\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\Cadastros\_ClienteLista.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
