@@ -17,8 +17,8 @@
         <AssociationConnector Association="GoTracker.FK_SimCardEquipamento" />
         <AssociationConnector Association="GoTracker.FK_MotoristaVeiculo" />
         <AssociationConnector Association="GoTracker.FK_PerfilUsuario" />
-        <AssociationConnector Association="GoTracker.ClienteCliente" />
         <AssociationConnector Association="GoTracker.ClienteUsuario" />
+        <AssociationConnector Association="GoTracker.ClienteCliente" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

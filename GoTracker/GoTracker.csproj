@@ -50,9 +50,10 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Extensions.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -126,6 +127,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\SimCardController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -138,6 +140,9 @@
     <Content Include="Content\Template\css\bootstrap.min.css" />
     <Content Include="Content\Template\css\entypo.css" />
     <Content Include="Content\Template\css\font-awesome.css" />
+    <Content Include="Content\Template\css\KoGrid.css" />
+    <Content Include="Content\Template\css\magicsuggest-min.css" />
+    <Content Include="Content\Template\css\magicsuggest.css" />
     <Content Include="Content\Template\css\orbmm.css" />
     <Content Include="Content\Template\css\styles-blue.css" />
     <Content Include="Content\Template\css\styles-brown.css" />
@@ -283,6 +288,7 @@
     <Content Include="scripts\koGrid-2.1.1.js" />
     <Content Include="scripts\magicsuggest-min.js" />
     <Content Include="scripts\magicsuggest.js" />
+    <Content Include="scripts\Views\SimCard.js" />
     <Content Include="scripts\Views\Cliente.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -386,6 +392,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Partials\Cadastros\_ClienteLista.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GoTrackerModel\GoTrackerModel.csproj">
+      <Project>{9b089e46-5ecc-4e8b-925c-b58fb05324a7}</Project>
+      <Name>GoTrackerModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\Cadastros\_EquipamentoLista.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SimCard\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\Cadastros\_SimCardLista.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

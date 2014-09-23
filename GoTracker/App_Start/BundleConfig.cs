@@ -26,7 +26,9 @@ namespace GoTracker
 
             bundles.Add(new StyleBundle("~/Template/Basic/css").Include(
                 "~/Content/Template/css/styles.css").Include(
-                "~/Content/Template/css/magicsuggest.css"));
+                "~/Content/Template/css/magicsuggest.css").Include(
+                "~/Content/Template/css/KoGrid.css"));
+
 
             //Javascripts
 
@@ -105,7 +107,9 @@ namespace GoTracker
             "~/scripts/knockout.mapping-latest.js",
             "~/scripts/knockout.pager.js",
             "~/scripts/knockout.simpleGrid.3.0.js",
-            "~/scripts/magicsuggest.js"));
+            "~/scripts/magicsuggest.js",
+            "~/scripts/jquery.mask.js",
+            "~/scripts/koGrid-2.1.1.js"));
 
         }
     }

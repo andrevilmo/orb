@@ -15,19 +15,14 @@
                 </div>
                 <span class="powerwidget-loader"></span>
             </header>
-            <div class="inner-spacer" role="content" data-bind="if: IsSelected">
-                <form action="demo-checkout-process.php" id="checkout-form" class="orb-form">
+            <div class="inner-spacer" role="content" data-bind="if: Selected()">
+                <form data-bind="submit: salvar" id="checkout-form" class="orb-form">
                     <header><span data-bind="text: Selected().Nome"></span></header>
                     <fieldset>
                         <div class="row">
                             <section class="col col-10">
-                                <label class="input">
-                                    <i class="icon-prepend glyphicon glyphicon-briefcase"></i>
-                                    <input type="text" id="clientePai" name="clientePai" readonly disabled data-bind="value: Pai()?Pai().Nome:''" placeholder="Cliente Pai">
-
-                                    <b class="tooltip tooltip-bottom-right">Cliente Responsável</b>
-                                </label>
-                                <div id="divSelPai" placeholder="Selecione/troque o cliente Pai ->" data-bind="Select: Pai,ValueField:'Nome',SetField:'Pai', SelectableItems: items,DisplayField: 'Nome' "></div>
+                                <div id="clientePai" placeholder="Cliente Pai" data-bind="Select: Pai,DivShow:'SelectedPai',TooltipMessage:'Cliente Pai',IconClass:'glyphicon-briefcase',SetField:'Pai', ObjectToSet: model,ValueField:'Id', SelectableItems: ko.mapping.toJS(model.items()),DisplayField: 'Nome' "></div>
+                                <div id="SelectedPai"></div>
                             </section>
                         </div>
                         <div class="row">
@@ -52,7 +47,7 @@
                             <section class="col col-6">
                                 <label class="input">
                                     <i class="icon-prepend entypo-doc-text"></i>
-                                    <input type="text" name="nome" data-bind="value: Selected().CNPJ,valueUpdate:'afterkeydown'" placeholder="CNPJ do Cliente">
+                                    <input type="text" class="cnpj" name="cnpj" data-bind="value: Selected().CNPJ,valueUpdate:'afterkeydown'" placeholder="CNPJ do Cliente">
                                     <b class="tooltip tooltip-right">CNPJ do Cliente</b>
                                 </label>
                             </section>
@@ -75,7 +70,7 @@
                             <section class="col col-6">
                                 <label class="input">
                                     <i class="icon-prepend entypo-phone"></i>
-                                    <input type="tel" data-bind="value: Selected().Telefone,valueUpdate:'afterkeydown'" name="telefone" placeholder="Telefone de Contato">
+                                    <input type="tel" class="fone" data-bind="value: Selected().Telefone,valueUpdate:'afterkeydown'" name="telefone" placeholder="Telefone de Contato">
                                     <b class="tooltip tooltip-right">Telefone de Contato do Cliente</b>
                                 </label>
                             </section>
@@ -100,13 +95,8 @@
                         </div>
                         <div class="row">
                             <section class="col col-6">
-                                <label class="input">
-                                    <i class="icon-prepend entypo-map"></i>
-                                    <input type="tel" readonly disabled data-bind="value: Selected().Estado" old-data-bind="value: Selected().Estado,valueUpdate:'afterkeydown'" name="estado" placeholder="Estado">
-                                    <b class="tooltip tooltip-right">Estado</b>
-
-                                    <div id="divSelEstado" placeholder="Selecione/troque o estado ->" data-bind="Select: Selected?Selected().Estado:'',SetField:'Estado',ValueField:'Nome', SelectableItems: [{Nome:'RS'},{Nome:'SC'}],DisplayField: 'Nome' "></div>
-                                </label>
+                                <div id="divSelEstado" placeholder="Estado" data-bind="Select: Selected,ObjectToSet: Selected(),DivShow:'SelectedEstado',TooltipMessage:'Estado',IconClass:'entypo-map',SetField:'Estado',ValueField:'Estado', SelectableItems: [{'Estado':'RJ'},{'Estado':'SP'},{'Estado':'RS'},{'Estado':'SC'}],DisplayField: 'Estado' "></div>
+                                <div id="SelectedEstado"></div>
                             </section>
                         </div>
                         <div class="row">

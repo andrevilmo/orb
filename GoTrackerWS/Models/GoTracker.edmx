@@ -33,13 +33,13 @@
       <End Role="Perfil" EntitySet="Perfils" />
       <End Role="Usuario" EntitySet="Usuarios" />
     </AssociationSet>
-    <AssociationSet Name="ClienteCliente" Association="GoTracker.Store.ClienteCliente">
-      <End Role="Cliente" EntitySet="Clientes" />
-      <End Role="Cliente1" EntitySet="Clientes" />
-    </AssociationSet>
     <AssociationSet Name="ClienteUsuario" Association="GoTracker.Store.ClienteUsuario">
       <End Role="Cliente" EntitySet="Clientes" />
       <End Role="Usuario" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="ClienteCliente" Association="GoTracker.Store.ClienteCliente">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="ClienteFilhoDe" EntitySet="Clientes" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clientes">
@@ -57,6 +57,7 @@
     <Property Name="Estado" Type="nvarchar(max)" Nullable="true" />
     <Property Name="WebSite" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Observacoes" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ClienteIdPai" Type="int" Nullable="false" />
     <Property Name="ClienteFilhoDe_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Equipamentoes">
@@ -195,18 +196,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClienteCliente">
-    <End Role="Cliente" Type="GoTracker.Store.Clientes" Multiplicity="0..1" />
-    <End Role="Cliente1" Type="GoTracker.Store.Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cliente">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Cliente1">
-        <PropertyRef Name="ClienteFilhoDe_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="ClienteUsuario">
     <End Role="Cliente" Type="GoTracker.Store.Clientes" Multiplicity="1" />
     <End Role="Usuario" Type="GoTracker.Store.Usuarios" Multiplicity="*" />
@@ -219,11 +208,23 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ClienteCliente">
+    <End Role="Cliente" Type="GoTracker.Store.Clientes" Multiplicity="0..1" />
+    <End Role="ClienteFilhoDe" Type="GoTracker.Store.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClienteFilhoDe">
+        <PropertyRef Name="ClienteFilhoDe_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="GoTracker" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
-        <EntityContainer Name="GoTrackerContainer" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="GoTrackerContainer" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="Clientes" EntityType="GoTracker.Cliente" />
           <EntitySet Name="Equipamentoes" EntityType="GoTracker.Equipamento" />
           <EntitySet Name="Motoristas" EntityType="GoTracker.Motorista" />
@@ -251,13 +252,13 @@
             <End Role="Perfil" EntitySet="Perfils" />
             <End Role="Usuario" EntitySet="Usuarios" />
           </AssociationSet>
-          <AssociationSet Name="ClienteCliente" Association="GoTracker.ClienteCliente">
-            <End Role="Cliente" EntitySet="Clientes" />
-            <End Role="Cliente1" EntitySet="Clientes" />
-          </AssociationSet>
           <AssociationSet Name="ClienteUsuario" Association="GoTracker.ClienteUsuario">
             <End Role="Cliente" EntitySet="Clientes" />
             <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="ClienteCliente" Association="GoTracker.ClienteCliente">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="ClienteFilhoDe" EntitySet="Clientes" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cliente">
@@ -276,9 +277,10 @@
           <Property Name="WebSite" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Observacoes" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Veiculoes" Relationship="GoTracker.FK_ClienteVeiculo" FromRole="Cliente" ToRole="Veiculo" />
-          <NavigationProperty Name="ClientePai" Relationship="GoTracker.ClienteCliente" FromRole="Cliente" ToRole="Cliente1" />
-          <NavigationProperty Name="ClienteFilhoDe" Relationship="GoTracker.ClienteCliente" FromRole="Cliente1" ToRole="Cliente" />
           <NavigationProperty Name="Usuarios" Relationship="GoTracker.ClienteUsuario" FromRole="Cliente" ToRole="Usuario" />
+          <NavigationProperty Name="ClientePai" Relationship="GoTracker.ClienteCliente" FromRole="Cliente" ToRole="ClienteFilhoDe" />
+          <NavigationProperty Name="ClienteFilhoDe" Relationship="GoTracker.ClienteCliente" FromRole="ClienteFilhoDe" ToRole="Cliente" />
+          <Property Name="ClienteIdPai" Type="Int32" Nullable="false" />
           </EntityType>
         <EntityType Name="Equipamento">
           <Key>
@@ -426,10 +428,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClienteCliente">
-          <End Type="GoTracker.Cliente" Role="Cliente" Multiplicity="0..1" />
-          <End Type="GoTracker.Cliente" Role="Cliente1" Multiplicity="0..1" />
-        </Association>
         <Association Name="ClienteUsuario">
           <End Type="GoTracker.Cliente" Role="Cliente" Multiplicity="1" />
           <End Type="GoTracker.Usuario" Role="Usuario" Multiplicity="*" />
@@ -441,6 +439,10 @@
               <PropertyRef Name="ClienteId" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <Association Name="ClienteCliente">
+          <End Type="GoTracker.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="GoTracker.Cliente" Role="ClienteFilhoDe" Multiplicity="0..1" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -462,6 +464,7 @@
           <ScalarProperty Name="Estado" ColumnName="Estado" />
           <ScalarProperty Name="WebSite" ColumnName="WebSite" />
           <ScalarProperty Name="Observacoes" ColumnName="Observacoes" />
+          <ScalarProperty Name="ClienteIdPai" ColumnName="ClienteIdPai" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -551,7 +554,7 @@
       <EndProperty Name="Cliente">
         <ScalarProperty Name="Id" ColumnName="ClienteFilhoDe_Id" />
       </EndProperty>
-      <EndProperty Name="Cliente1">
+      <EndProperty Name="ClienteFilhoDe">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
       <Condition ColumnName="ClienteFilhoDe_Id" IsNull="false" />

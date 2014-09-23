@@ -31,10 +31,11 @@ namespace GoTrackerWS.Models
         public string Estado { get; set; }
         public string WebSite { get; set; }
         public string Observacoes { get; set; }
+        public int ClienteIdPai { get; set; }
     
         public virtual ICollection<Veiculo> Veiculoes { get; set; }
+        public virtual ICollection<Usuario> Usuarios { get; set; }
         public virtual Cliente ClientePai { get; set; }
         public virtual Cliente ClienteFilhoDe { get; set; }
-        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

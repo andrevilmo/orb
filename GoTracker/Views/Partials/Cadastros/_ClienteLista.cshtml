@@ -6,10 +6,8 @@
         <!-- New widget -->
         <div class='liveExample'>
             <div class="table-responsive">
-                <!--data-bind='simpleGrid: gridViewModel'-->
-                <div id="listaClientes" class="gridstyle" data-bind='simpleGrid: gridViewModel'> </div>
+                <div id="listaClientes" class="gridstyle col-md-12" data-bind='koGrid: gridOptions'> </div>  
              </div>
- 
         </div>
         <!-- /End Widget -->
         <button data-bind='click: addItem'>

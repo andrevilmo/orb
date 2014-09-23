@@ -1,4 +1,5 @@
 //ORB JavaScript
+window.urlApi = "http://localhost:9961/";
 // DOM Preload
 (function ($) {
 
@@ -4156,3 +4157,135 @@
 
     });
 })(jQuery);
+function applyEvents(f_click) {
+    $('.fa-chevron-circle-up').click();
+    $('#powerwidgets').css('visibility', 'visible');
+    $('#listaClientes table').addClass("table table-striped table-bordered table-condensed table-hover");
+    $('.ko-grid-pageLinks span').html('Pág.');
+    $('.ko-grid tbody tr td').off();
+    $('.ko-grid tbody tr td').unbind();
+    $('.ko-grid tbody tr td').click(function (ev, ev1) {
+        console.log("applyEvents");
+        $('#powerwidgets').css('visibility', 'visible');
+        $('.fa-chevron-circle-down').click();
+        var selectedIndex = $($(ev.target).parent())[0].rowIndex - 1;
+        if (f_click)
+            f_click(selectedIndex);
+        
+    });/*
+    $('.ko-grid-pageLinks > a').unbind();
+    $('.ko-grid-pageLinks > a').off();
+    $('.ko-grid-pageLinks > a').click(function () {
+        console.log('selected apply');
+        applyEvents(function (index) {
+            model.selectedItem(index);
+        });
+    });*/
+}
+function applyMasks() {
+    $('.ddd').mask('(000)');
+    $('.fone').mask('(00) 00000-0000');
+    $('.cnpj').mask('00.000.000/0000-00');
+}
+function saverel(id, id_rel, rel, ret) {
+    $.ajax({
+        url: window.urlApi + "api/Relations/Save/?id="+id+"&id_rel="+id_rel+"&rel="+rel,
+        type: "POST",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: null,
+        error: function (xhr, status) {
+            console.log(status);
+        },
+        success: function (result) {
+            if (typeof (ret) == 'function')
+                ret(result);
+        }
+    });
+}
+$(document).ready(function () {
+   
+ko.bindingHandlers.Select = {
+    _self: this,
+    _element: null,
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var toAdd = null;
+        $('body').append("<div style='display:none' id='hiddenDiv'></div>");
+        var objSel = $('#' + element.id);
+        var magicobj = null;
+        if (allBindings.get('DivShow')) {
+            magicobj = objSel.magicSuggest({
+                data: typeof (allBindings.get('SelectableItems')) == "function" ? allBindings.get('SelectableItems')() : allBindings.get('SelectableItems'),
+                displayField: allBindings.get('DisplayField'),
+                maxSelection: 1,
+                valueField: allBindings.get('ValueField'),
+                selectionPosition: 'outer',
+                placeholder: allBindings.get('TooltipMessage'),
+                maxSelectionRenderer: function (v, vl) {
+                    return "";
+                }
+                , selectionContainer: $('#' + allBindings.get('DivShow'))
+            });
+            $('#' + allBindings.get('DivShow')).addClass("col col-2 msgselect");
+            $('#' + element.id).addClass("col col-10");
+        }
+        else
+            magicobj = objSel.magicSuggest({
+                data: typeof (allBindings.get('SelectableItems')) == "function" ? allBindings.get('SelectableItems')() : allBindings.get('SelectableItems'),
+                displayField: allBindings.get('DisplayField'),
+                maxSelection: 1,
+                valueField: allBindings.get('ValueField'),
+                selectionPosition: 'outer',
+                placeholder: allBindings.get('TooltipMessage'),
+                maxSelectionRenderer: function (v, vl) {
+                    return "";
+                }
+            });
+        magicobj.allBindings = allBindings;
+        if (magicobj) {
+            element._element = magicobj;
+            if ($(magicobj)[0].allBindings().IconClass)
+                $('<i class="icon-prepend ' + $(magicobj)[0].allBindings().IconClass + '"></i>').insertAfter(magicobj.input);
+            if ($(magicobj)[0].allBindings().TooltipMessage)
+                $('<b class="tooltip tooltip-bottom-right">' + $(magicobj)[0].allBindings().TooltipMessage + '</b>').insertAfter(magicobj.input);
+            ($(magicobj.input).parent().children()).wrapAll("<label class='input' />");
+            $(magicobj).on('selectionchange', function (e, m) {
+                $($(e.target))[0].input.attr("placeholder", $(e.target)[0].allBindings().TooltipMessage);
+                $(e.target).attr("placeholder", $(magicobj)[0].allBindings().TooltipMessage);
+                if ($(magicobj)[0].allBindings().ObjectToSet)
+                {
+                    var obj = $(magicobj)[0].allBindings().ObjectToSet;
+                    if (obj[$(e.target)[0].allBindings().SetField] != null)
+                        if (this.getSelection()[0])
+                            obj[$(e.target)[0].allBindings().SetField](this.getSelection()[0][$(e.target)[0].allBindings().ValueField]);
+                        else
+                            obj[$(e.target)[0].allBindings().SetField](null);
+                
+                }
+            });
+        }
+    },
+    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        // This will be called once when the binding is first applied to an element,
+        // and again whenever any observables/computeds that are accessed change
+        // Update the DOM element based on the supplied values here.
+        element._element.clear(true);
+        var objToCompare = null;
+        if (allBindings().ObjectToSet && allBindings().ObjectToSet[allBindings().SetField]&&
+            allBindings().ObjectToSet[allBindings().SetField]()) {
+            if (typeof (allBindings().ObjectToSet[allBindings().SetField]().Id) == "function") {
+                objToCompare = allBindings().ObjectToSet[allBindings().SetField]().Id();
+                $(allBindings().SelectableItems).each(function () {
+                    if (objToCompare == this.Id) {
+                        /* ---------------------------- */
+                        element._element.setValue([this]);
+                        return;
+                    }
+                });
+            } else
+                element._element.setValue([allBindings().ObjectToSet[allBindings().SetField]()]);
+            
+        }
+    }
+};
+});

@@ -9269,21 +9269,47 @@ code {
 
 .form-control {
     border: 0px solid #c0c2c7 !important;
-}
-.ms-ctn-focus {
-    border-color: white !important;
-    box-shadow: none !important;  
-}
-.ms-ctn {
-    width: 50%;
-    margin-left: 46%;
-    margin-top: -4%;
-
+    padding-left: 0px !important;
 }
 
 .ko-grid tbody tr td {
     cursor: pointer;
 }
-#powerwidgets {
-    visibility: hidden;
+ms-ctn form-control > input {
+    margin-top: -5px;
+    margin-left: -11px;
+    padding-left: 43px;
+}
+
+ms-ctn form-control {
+    padding-left: 0px;
+}
+
+
+.ms-ctn-focus {    
+outline: 0;
+ -webkit-box-shadow: none !important; 
+ box-shadow: none !important;
+-ms-transition: border-color #66afe9 !important;
+-moz-transition: border-color #66afe9 !important;
+-webkit-transition: border-color #66afe9 !important;
+
+}
+
+.ms-ctn > .input > input {
+    padding-left: 46px;
+}
+
+.msgselect {
+    margin-top:10px;
+}
+
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    width: 400px; 
+    height: 300px;
+    float: left;
+}
+.kgViewport {
+    height: 300px;
 }

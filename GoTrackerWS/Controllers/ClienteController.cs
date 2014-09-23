@@ -10,7 +10,7 @@ using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
 using System.Web.Http.OData.Routing;
-using GoTrackerWS.Models;
+using GoTrackerModel.Models;
 
 namespace GoTrackerWS.Controllers
 {
@@ -18,7 +18,7 @@ namespace GoTrackerWS.Controllers
     To add a route for this controller, merge these statements into the Register method of the WebApiConfig class. Note that OData URLs are case sensitive.
 
     using System.Web.Http.OData.Builder;
-    using GoTrackerWS.Models;
+    using GoTrackerModel.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<Cliente>("Cliente");
     builder.EntitySet<Veiculo>("Veiculo"); 
@@ -149,6 +149,13 @@ namespace GoTrackerWS.Controllers
             return db.Clientes.Where(m => m.Id == key).SelectMany(m => m.Veiculoes);
         }
 
+        // GET odata/Cliente(5)/Usuarios
+        [Queryable]
+        public IQueryable<Usuario> GetUsuarios([FromODataUri] int key)
+        {
+            return db.Clientes.Where(m => m.Id == key).SelectMany(m => m.Usuarios);
+        }
+
         // GET odata/Cliente(5)/ClientePai
         [Queryable]
         public SingleResult<Cliente> GetClientePai([FromODataUri] int key)
@@ -161,13 +168,6 @@ namespace GoTrackerWS.Controllers
         public SingleResult<Cliente> GetClienteFilhoDe([FromODataUri] int key)
         {
             return SingleResult.Create(db.Clientes.Where(m => m.Id == key).Select(m => m.ClienteFilhoDe));
-        }
-
-        // GET odata/Cliente(5)/Usuarios
-        [Queryable]
-        public IQueryable<Usuario> GetUsuarios([FromODataUri] int key)
-        {
-            return db.Clientes.Where(m => m.Id == key).SelectMany(m => m.Usuarios);
         }
 
         protected override void Dispose(bool disposing)

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/29/2014 11:14:46
+-- Date Created: 09/17/2014 11:56:05
 -- Generated from EDMX file: C:\orb\GoTrackerWS\Models\GoTracker.edmx
 -- --------------------------------------------------
 
@@ -32,11 +32,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PerfilUsuario]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Usuarios] DROP CONSTRAINT [FK_PerfilUsuario];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ClienteCliente]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Clientes] DROP CONSTRAINT [FK_ClienteCliente];
-GO
 IF OBJECT_ID(N'[dbo].[FK_ClienteUsuario]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Usuarios] DROP CONSTRAINT [FK_ClienteUsuario];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ClienteCliente]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Clientes] DROP CONSTRAINT [FK_ClienteCliente];
 GO
 
 -- --------------------------------------------------
@@ -82,6 +82,7 @@ CREATE TABLE [dbo].[Clientes] (
     [Estado] nvarchar(max)  NULL,
     [WebSite] nvarchar(max)  NULL,
     [Observacoes] nvarchar(max)  NULL,
+    [ClienteIdPai] int  NOT NULL,
     [ClienteFilhoDe_Id] int  NULL
 );
 GO
@@ -287,21 +288,6 @@ ON [dbo].[Usuarios]
     ([PerfilId]);
 GO
 
--- Creating foreign key on [ClienteFilhoDe_Id] in table 'Clientes'
-ALTER TABLE [dbo].[Clientes]
-ADD CONSTRAINT [FK_ClienteCliente]
-    FOREIGN KEY ([ClienteFilhoDe_Id])
-    REFERENCES [dbo].[Clientes]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ClienteCliente'
-CREATE INDEX [IX_FK_ClienteCliente]
-ON [dbo].[Clientes]
-    ([ClienteFilhoDe_Id]);
-GO
-
 -- Creating foreign key on [ClienteId] in table 'Usuarios'
 ALTER TABLE [dbo].[Usuarios]
 ADD CONSTRAINT [FK_ClienteUsuario]
@@ -315,6 +301,21 @@ GO
 CREATE INDEX [IX_FK_ClienteUsuario]
 ON [dbo].[Usuarios]
     ([ClienteId]);
+GO
+
+-- Creating foreign key on [ClienteFilhoDe_Id] in table 'Clientes'
+ALTER TABLE [dbo].[Clientes]
+ADD CONSTRAINT [FK_ClienteCliente]
+    FOREIGN KEY ([ClienteFilhoDe_Id])
+    REFERENCES [dbo].[Clientes]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ClienteCliente'
+CREATE INDEX [IX_FK_ClienteCliente]
+ON [dbo].[Clientes]
+    ([ClienteFilhoDe_Id]);
 GO
 
 -- --------------------------------------------------

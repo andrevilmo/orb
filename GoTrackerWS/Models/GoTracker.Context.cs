@@ -18,6 +18,7 @@ namespace GoTrackerWS.Models
         public GoTrackerContainer()
             : base("name=GoTrackerContainer")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

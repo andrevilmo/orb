@@ -10,7 +10,7 @@ using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
 using System.Web.Http.OData.Routing;
-using GoTrackerWS.Models;
+using GoTrackerModel.Models;
 
 namespace GoTrackerWS.Controllers
 {
@@ -18,45 +18,44 @@ namespace GoTrackerWS.Controllers
     To add a route for this controller, merge these statements into the Register method of the WebApiConfig class. Note that OData URLs are case sensitive.
 
     using System.Web.Http.OData.Builder;
-    using GoTrackerWS.Models;
+    using GoTrackerModel.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Equipamento>("Equipamento");
-    builder.EntitySet<Veiculo>("Veiculo"); 
-    builder.EntitySet<SimCard>("SimCards"); 
+    builder.EntitySet<SimCard>("SimCard");
+    builder.EntitySet<Equipamento>("Equipamento"); 
     config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class EquipamentoController : ODataController
+    public class SimCardController : ODataController
     {
         private GoTrackerContainer db = new GoTrackerContainer();
 
-        // GET odata/Equipamento
+        // GET odata/SimCard
         [Queryable]
-        public IQueryable<Equipamento> GetEquipamento()
+        public IQueryable<SimCard> GetSimCard()
         {
-            return db.Equipamentoes;
+            return db.SimCards;
         }
 
-        // GET odata/Equipamento(5)
+        // GET odata/SimCard(5)
         [Queryable]
-        public SingleResult<Equipamento> GetEquipamento([FromODataUri] int key)
+        public SingleResult<SimCard> GetSimCard([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Equipamentoes.Where(equipamento => equipamento.Id == key));
+            return SingleResult.Create(db.SimCards.Where(simcard => simcard.Id == key));
         }
 
-        // PUT odata/Equipamento(5)
-        public IHttpActionResult Put([FromODataUri] int key, Equipamento equipamento)
+        // PUT odata/SimCard(5)
+        public IHttpActionResult Put([FromODataUri] int key, SimCard simcard)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (key != equipamento.Id)
+            if (key != simcard.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(equipamento).State = EntityState.Modified;
+            db.Entry(simcard).State = EntityState.Modified;
 
             try
             {
@@ -64,7 +63,7 @@ namespace GoTrackerWS.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EquipamentoExists(key))
+                if (!SimCardExists(key))
                 {
                     return NotFound();
                 }
@@ -74,39 +73,39 @@ namespace GoTrackerWS.Controllers
                 }
             }
 
-            return Updated(equipamento);
+            return Updated(simcard);
         }
 
-        // POST odata/Equipamento
-        public IHttpActionResult Post(Equipamento equipamento)
+        // POST odata/SimCard
+        public IHttpActionResult Post(SimCard simcard)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Equipamentoes.Add(equipamento);
+            db.SimCards.Add(simcard);
             db.SaveChanges();
 
-            return Created(equipamento);
+            return Created(simcard);
         }
 
-        // PATCH odata/Equipamento(5)
+        // PATCH odata/SimCard(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] int key, Delta<Equipamento> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<SimCard> patch)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            Equipamento equipamento = db.Equipamentoes.Find(key);
-            if (equipamento == null)
+            SimCard simcard = db.SimCards.Find(key);
+            if (simcard == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(equipamento);
+            patch.Patch(simcard);
 
             try
             {
@@ -114,7 +113,7 @@ namespace GoTrackerWS.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EquipamentoExists(key))
+                if (!SimCardExists(key))
                 {
                     return NotFound();
                 }
@@ -124,36 +123,29 @@ namespace GoTrackerWS.Controllers
                 }
             }
 
-            return Updated(equipamento);
+            return Updated(simcard);
         }
 
-        // DELETE odata/Equipamento(5)
+        // DELETE odata/SimCard(5)
         public IHttpActionResult Delete([FromODataUri] int key)
         {
-            Equipamento equipamento = db.Equipamentoes.Find(key);
-            if (equipamento == null)
+            SimCard simcard = db.SimCards.Find(key);
+            if (simcard == null)
             {
                 return NotFound();
             }
 
-            db.Equipamentoes.Remove(equipamento);
+            db.SimCards.Remove(simcard);
             db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET odata/Equipamento(5)/Veiculoes
+        // GET odata/SimCard(5)/Equipamentoes
         [Queryable]
-        public IQueryable<Veiculo> GetVeiculoes([FromODataUri] int key)
+        public IQueryable<Equipamento> GetEquipamentoes([FromODataUri] int key)
         {
-            return db.Equipamentoes.Where(m => m.Id == key).SelectMany(m => m.Veiculoes);
-        }
-
-        // GET odata/Equipamento(5)/SimCard
-        [Queryable]
-        public SingleResult<SimCard> GetSimCard([FromODataUri] int key)
-        {
-            return SingleResult.Create(db.Equipamentoes.Where(m => m.Id == key).Select(m => m.SimCard));
+            return db.SimCards.Where(m => m.Id == key).SelectMany(m => m.Equipamentoes);
         }
 
         protected override void Dispose(bool disposing)
@@ -165,9 +157,9 @@ namespace GoTrackerWS.Controllers
             base.Dispose(disposing);
         }
 
-        private bool EquipamentoExists(int key)
+        private bool SimCardExists(int key)
         {
-            return db.Equipamentoes.Count(e => e.Id == key) > 0;
+            return db.SimCards.Count(e => e.Id == key) > 0;
         }
     }
 }
