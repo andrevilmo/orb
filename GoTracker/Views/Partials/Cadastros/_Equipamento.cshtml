@@ -2,31 +2,34 @@
     Layout = null;
 }
 <div class="row" id="powerwidgets">
-    <div class="col-md-6 bootstrap-grid">
+    <div class="col-md-12 bootstrap-grid">
         <!-- New widget -->
         <div class="powerwidget green powerwidget-sortable" id="registration-form-validation-widget" data-widget-editbutton="false" role="widget" style="">
             <header role="heading">
                 <h2>Cadastrar<small>Equipamentos</small></h2>
                 <div class="powerwidget-ctrls" role="menu"><a href="#" class="button-icon powerwidget-fullscreen-btn"><i class="fa fa-arrows-alt "></i></a><a href="#" class="button-icon powerwidget-edit-btn"><i class="fa fa-cog"></i></a> <a href="#" class="button-icon powerwidget-toggle-btn"><i class="fa fa-chevron-circle-up "></i></a></div><span class="powerwidget-loader"></span>
             </header>
-            <div class="inner-spacer" role="content">
-                <form action="demo-checkout-process.php" id="checkout-form" class="orb-form">
-                    <header>Novo Equipamento</header>
+            <div class="inner-spacer" role="content" data-bind="if: Selected()">
+                <form data-bind="submit: salvar" id="checkout-form" class="orb-form">
+                    <header><span data-bind="text: Selected().Nome"></span></header>
                     <fieldset>
                         <div class="row">
                             <section class="col col-10">
+                                <div id="clienteCliente" placeholder="Cliente" data-bind="Select: Selected().ClienteId,DivShow:'SelectedCliente',TooltipMessage:'Cliente',IconClass:'glyphicon-briefcase',SetField:'ClienteId', ObjectToSet: model.Selected(),ValueField:'Id', SelectableItems: ko.mapping.toJS(model.Clientes()),DisplayField: 'Nome' "></div>
+                                <div id="SelectedCliente"></div>
+                                <!--
                                 <label class="input">
                                     <i class="icon-prepend fa fa-user"></i>
                                     <input type="text" name="cliente" placeholder="Cliente">
                                     <b class="tooltip tooltip-bottom-right">Cliente Responsável pelo Equipamento</b>
-                                </label>
+                                </label>-->
                             </section>
                         </div>
                         <div class="row">
                             <section class="col col-6">
                                 <label class="input">
                                     <i class="icon-prepend glyphicon glyphicon-barcode"></i>
-                                    <input type="email" name="serial" placeholder="Número de Série">
+                                    <input data-bind="value: Selected().NumeroSerie,valueUpdate:'afterkeydown'" name="serial" placeholder="Número de Série">
                                     <b class="tooltip tooltip-bottom-right">Serial do Equipamento</b>
                                 </label>
                             </section>
@@ -34,27 +37,29 @@
                         <div class="row">
                             <section class="col col-6">
                                 <label class="select">
-                                    <select name="tipoEquipamento">
+                                    <select data-bind="value: Selected().Modelo" name="tipoEquipamento">
                                         <option value="0" selected="" disabled="">Modelo do Equipamento</option>
-                                        <option value="1">Afghanistan</option>
-                                        <option value="2">Albania</option>
-                                        <option value="3">Algeria</option>
-                                        <option value="4">American Samoa</option>
-                                        <option value="5">Andorra</option>
-                                        <option value="6">Angola</option>
-                                        <option value="7">Anguilla</option>
+                                        <option value="Afghanistan">Afghanistan</option>
+                                        <option value="Albania">Albania</option>
+                                        <option value="Algeria">Algeria</option>
+                                        <option value="American Samoa">American Samoa</option>
+                                        <option value="Andorra">Andorra</option>
+                                        <option value="Angola">Angola</option>
+                                        <option value="Anguilla">Anguilla</option>
                                     </select>
-                                    <i></i>
                                 </label>
                             </section>
                         </div>
                         <div class="row">
                             <section class="col col-6">
+                                <div id="SimCard" placeholder="SimCard" data-bind="Select: Selected().SimCardId,DivShow:'SelectedSimCard',TooltipMessage:'Sim Card',IconClass:'glyphicon-transfer',SetField:'SimCardId', ObjectToSet: model.Selected(),ValueField:'Id', SelectableItems: ko.mapping.toJS(model.SimCards()),DisplayField: 'Telefone' "></div>
+                                <div id="SelectedSimCard"></div>
+                                <!--
                                 <label class="input">
                                     <i class="icon-prepend glyphicon glyphicon-transfer"></i>
                                     <input type="text" name="Chip" placeholder="Chip">
                                     <b class="tooltip tooltip-bottom-right">Chip Utilizado no Equipamento</b>
-                                </label>
+                                </label>-->
                             </section>
                         </div>
                     </fieldset>

@@ -34,6 +34,7 @@ namespace GoTrackerWS
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             builder.EntitySet<Cliente>("Cliente");
             builder.EntitySet<Equipamento>("Equipamento");
+            builder.EntitySet<Motorista>("Motorista");
             builder.EntitySet<Veiculo>("Veiculo");
             builder.EntitySet<SimCard>("SimCard");
             builder.EntitySet<Usuario>("Usuario");

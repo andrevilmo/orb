@@ -83,6 +83,7 @@ $(document).ready(function () {
                     applyEvents(function (index) {
                         model.selectedItem(index);
                     });
+                    model.items.valueHasMutated();
                 }
             });
         };

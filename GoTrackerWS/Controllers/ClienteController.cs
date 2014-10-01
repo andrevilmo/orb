@@ -21,8 +21,8 @@ namespace GoTrackerWS.Controllers
     using GoTrackerModel.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<Cliente>("Cliente");
-    builder.EntitySet<Veiculo>("Veiculo"); 
     builder.EntitySet<Usuario>("Usuario"); 
+    builder.EntitySet<SimCard>("SimCard"); 
     config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel());
     */
     public class ClienteController : ODataController
@@ -142,13 +142,6 @@ namespace GoTrackerWS.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET odata/Cliente(5)/Veiculoes
-        [Queryable]
-        public IQueryable<Veiculo> GetVeiculoes([FromODataUri] int key)
-        {
-            return db.Clientes.Where(m => m.Id == key).SelectMany(m => m.Veiculoes);
-        }
-
         // GET odata/Cliente(5)/Usuarios
         [Queryable]
         public IQueryable<Usuario> GetUsuarios([FromODataUri] int key)
@@ -168,6 +161,13 @@ namespace GoTrackerWS.Controllers
         public SingleResult<Cliente> GetClienteFilhoDe([FromODataUri] int key)
         {
             return SingleResult.Create(db.Clientes.Where(m => m.Id == key).Select(m => m.ClienteFilhoDe));
+        }
+
+        // GET odata/Cliente(5)/SimCard
+        [Queryable]
+        public SingleResult<SimCard> GetSimCard([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.Clientes.Where(m => m.Id == key).Select(m => m.SimCard));
         }
 
         protected override void Dispose(bool disposing)

@@ -14,11 +14,6 @@ namespace GoTrackerModel.Models
     
     public partial class Motorista
     {
-        public Motorista()
-        {
-            this.Veiculoes = new HashSet<Veiculo>();
-        }
-    
         public int Id { get; set; }
         public string Nome { get; set; }
         public string NumeroDOC { get; set; }
@@ -28,7 +23,8 @@ namespace GoTrackerModel.Models
         public string Email { get; set; }
         public string Telefone { get; set; }
         public string Celular { get; set; }
+        public Nullable<int> ClienteId { get; set; }
     
-        public virtual ICollection<Veiculo> Veiculoes { get; set; }
+        public virtual Cliente Cliente { get; set; }
     }
 }

@@ -95,7 +95,7 @@ namespace GoTracker
                "~/Content/Template/js/vendors/gmap/jquery.gmap.min.js"));
                 
             // Forms
-             bundles.Add(new ScriptBundle("~/Template/Forms").Include(
+            bundles.Add(new ScriptBundle("~/Template/Forms").Include(
             "~/Content/Template/js/vendors/forms/jquery.form.min.js",
             "~/Content/Template/js/vendors/forms/jquery.validate.min.js",
             "~/Content/Template/js/vendors/forms/jquery.maskedinput.min.js",
@@ -109,7 +109,9 @@ namespace GoTracker
             "~/scripts/knockout.simpleGrid.3.0.js",
             "~/scripts/magicsuggest.js",
             "~/scripts/jquery.mask.js",
-            "~/scripts/koGrid-2.1.1.js"));
+            "~/scripts/koGrid-2.1.1.js",
+            "~/scripts/datepicker-pt-BR.js",
+            "~/scripts/jquery-ui-1.11.1.custom/jquery-ui.js"));
 
         }
     }

@@ -2817,12 +2817,12 @@ window.urlApi = "http://localhost:9961/";
         // ========================================================================
 
         //Masking
-
+        /*
         if ($('#date, #date2').length) {
             $("#date, #date2").mask('99/99/9999', {
                 placeholder: 'X'
             });
-        }
+        }*/
 
         if ($('#phone').length) {
             $("#phone").mask('(999) 999-9999', {
@@ -2861,13 +2861,13 @@ window.urlApi = "http://localhost:9961/";
         //Datepicker
 
         // Regular datepicker
-        if ($('#date').length) {
+        /*if ($('#date').length) {
             $('#date').datepicker({
                 dateFormat: 'dd.mm.yy',
                 prevText: '<i class="fa fa-chevron-left"></i>',
                 nextText: '<i class="fa fa-chevron-right"></i>'
             });
-        }
+        }*/
 
         // Date range
         if ($('#start').length) {
@@ -4204,7 +4204,34 @@ function saverel(id, id_rel, rel, ret) {
     });
 }
 $(document).ready(function () {
-   
+    ko.bindingHandlers.dateControl = {
+        init: function (element, valueAccessor, allBindingsAccessor) {
+            var options = allBindingsAccessor().datepickerOptions || {},
+                $el = $(element);
+            
+            //initialize datepicker with some optional options
+            $el.datepicker(options);
+            
+            ko.utils.registerEventHandler(element, "change", function () {
+                var observable = valueAccessor();
+                observable($el.datepicker("getDate"));
+            });
+
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+                $el.datepicker("destroy");
+            });
+
+        },
+        update: function (element, valueAccessor) {
+            var value = ko.utils.unwrapObservable(valueAccessor()),
+                $el = $(element),
+                current = $el.datepicker("getDate");
+
+            if (value - current !== 0) {
+                $el.datepicker("setDate", value);
+            }
+        }
+    };
 ko.bindingHandlers.Select = {
     _self: this,
     _element: null,

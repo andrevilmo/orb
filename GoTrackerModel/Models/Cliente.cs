@@ -16,8 +16,8 @@ namespace GoTrackerModel.Models
     {
         public Cliente()
         {
-            this.Veiculoes = new HashSet<Veiculo>();
             this.Usuarios = new HashSet<Usuario>();
+            this.Perfils = new HashSet<Perfil>();
         }
     
         public int Id { get; set; }
@@ -32,10 +32,10 @@ namespace GoTrackerModel.Models
         public string WebSite { get; set; }
         public string Observacoes { get; set; }
     
-        public virtual ICollection<Veiculo> Veiculoes { get; set; }
         public virtual ICollection<Usuario> Usuarios { get; set; }
         public virtual Cliente ClientePai { get; set; }
         public virtual Cliente ClienteFilhoDe { get; set; }
         public virtual SimCard SimCard { get; set; }
+        public virtual ICollection<Perfil> Perfils { get; set; }
     }
 }

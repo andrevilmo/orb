@@ -28,6 +28,8 @@ namespace GoTrackerModel.Models
         public int AcessoUsuario { get; set; }
         public int AcessoVeiculo { get; set; }
         public int AcessoPerfil { get; set; }
+        public Nullable<int> ClienteId { get; set; }
+        public string PlanoDados { get; set; }
     
         public virtual ICollection<Usuario> Usuarios { get; set; }
     }

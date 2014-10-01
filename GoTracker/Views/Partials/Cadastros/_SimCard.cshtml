@@ -21,7 +21,7 @@
                     <fieldset>
                         <div class="row">
                             <section class="col col-9">
-                                <div id="clienteCliente" placeholder="Cliente" data-bind="Select: Cliente,DivShow:'SelectedCliente',TooltipMessage:'Cliente',IconClass:'glyphicon-briefcase',SetField:'ClienteId', ObjectToSet: model.Selected(),ValueField:'ClienteId', SelectableItems: ko.mapping.toJS(model.Clientes()),DisplayField: 'Nome' "></div>
+                                <div id="clienteCliente" placeholder="Cliente" data-bind="Select: Selected().ClienteId,DivShow:'SelectedCliente',TooltipMessage:'Cliente',IconClass:'glyphicon-briefcase',SetField:'ClienteId', ObjectToSet: model.Selected(),ValueField:'Id', SelectableItems: ko.mapping.toJS(model.Clientes()),DisplayField: 'Nome' "></div>
                                 <div id="SelectedCliente"></div>
                                 <!--
                                 <label class="input">

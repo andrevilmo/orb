@@ -14,18 +14,12 @@ namespace GoTrackerModel.Models
     
     public partial class Equipamento
     {
-        public Equipamento()
-        {
-            this.Veiculoes = new HashSet<Veiculo>();
-        }
-    
         public int Id { get; set; }
         public string NumeroSerie { get; set; }
         public string Modelo { get; set; }
         public int SimCardId { get; set; }
         public Nullable<int> ClienteId { get; set; }
     
-        public virtual ICollection<Veiculo> Veiculoes { get; set; }
         public virtual SimCard SimCard { get; set; }
     }
 }

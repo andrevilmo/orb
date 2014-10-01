@@ -138,8 +138,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\ClienteController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\EquipamentoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MotoristaController.cs" />
+    <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\RelationsController.cs" />
     <Compile Include="Controllers\SimCardController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

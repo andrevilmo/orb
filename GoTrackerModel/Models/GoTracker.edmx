@@ -45,6 +45,14 @@
       <End Role="Cliente" EntitySet="Clientes" />
       <End Role="SimCard" EntitySet="SimCards" />
     </AssociationSet>
+    <AssociationSet Name="ClienteMotorista" Association="GoTracker.Store.ClienteMotorista">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="Motorista" EntitySet="Motoristas" />
+    </AssociationSet>
+    <AssociationSet Name="ClientePerfil" Association="GoTracker.Store.ClientePerfil">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="Perfil" EntitySet="Perfils" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clientes">
     <Key>
@@ -86,6 +94,7 @@
     <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Telefone" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Celular" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClienteId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Perfils">
     <Key>
@@ -100,6 +109,8 @@
     <Property Name="AcessoUsuario" Type="int" Nullable="false" />
     <Property Name="AcessoVeiculo" Type="int" Nullable="false" />
     <Property Name="AcessoPerfil" Type="int" Nullable="false" />
+    <Property Name="ClienteId" Type="int" Nullable="true" />
+    <Property Name="PlanoDados" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="SimCards">
     <Key>
@@ -238,6 +249,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ClienteMotorista">
+    <End Role="Cliente" Type="GoTracker.Store.Clientes" Multiplicity="0..1" />
+    <End Role="Motorista" Type="GoTracker.Store.Motoristas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Motorista">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClientePerfil">
+    <End Role="Cliente" Type="GoTracker.Store.Clientes" Multiplicity="0..1" />
+    <End Role="Perfil" Type="GoTracker.Store.Perfils" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Perfil">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -282,6 +317,14 @@
             <End Role="Cliente" EntitySet="Clientes" />
             <End Role="SimCard" EntitySet="SimCards" />
           </AssociationSet>
+          <AssociationSet Name="ClienteMotorista" Association="GoTracker.ClienteMotorista">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Motorista" EntitySet="Motoristas" />
+          </AssociationSet>
+          <AssociationSet Name="ClientePerfil" Association="GoTracker.ClientePerfil">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Perfil" EntitySet="Perfils" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cliente">
           <Key>
@@ -298,11 +341,11 @@
           <Property Name="Estado" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="WebSite" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Observacoes" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Veiculoes" Relationship="GoTracker.FK_ClienteVeiculo" FromRole="Cliente" ToRole="Veiculo" />
           <NavigationProperty Name="Usuarios" Relationship="GoTracker.ClienteUsuario" FromRole="Cliente" ToRole="Usuario" />
           <NavigationProperty Name="ClientePai" Relationship="GoTracker.ClienteCliente" FromRole="Cliente" ToRole="ClienteFilhoDe" />
           <NavigationProperty Name="ClienteFilhoDe" Relationship="GoTracker.ClienteCliente" FromRole="ClienteFilhoDe" ToRole="Cliente" />
           <NavigationProperty Name="SimCard" Relationship="GoTracker.ClienteSimCard" FromRole="Cliente" ToRole="SimCard" />
+          <NavigationProperty Name="Perfils" Relationship="GoTracker.ClientePerfil" FromRole="Cliente" ToRole="Perfil" />
           </EntityType>
         <EntityType Name="Equipamento">
           <Key>
@@ -312,7 +355,6 @@
           <Property Name="NumeroSerie" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Modelo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SimCardId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Veiculoes" Relationship="GoTracker.FK_EquipamentoVeiculo" FromRole="Equipamento" ToRole="Veiculo" />
           <NavigationProperty Name="SimCard" Relationship="GoTracker.FK_SimCardEquipamento" FromRole="Equipamento" ToRole="SimCard" />
           <Property Name="ClienteId" Type="Int32" Nullable="true" />
         </EntityType>
@@ -329,7 +371,8 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Telefone" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Celular" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Veiculoes" Relationship="GoTracker.FK_MotoristaVeiculo" FromRole="Motorista" ToRole="Veiculo" />
+          <NavigationProperty Name="Cliente" Relationship="GoTracker.ClienteMotorista" FromRole="Motorista" ToRole="Cliente" />
+          <Property Name="ClienteId" Type="Int32" Nullable="true" />
         </EntityType>
         <EntityType Name="Perfil">
           <Key>
@@ -345,6 +388,8 @@
           <Property Name="AcessoVeiculo" Type="Int32" Nullable="false" />
           <Property Name="AcessoPerfil" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Usuarios" Relationship="GoTracker.FK_PerfilUsuario" FromRole="Perfil" ToRole="Usuario" />
+          <Property Name="ClienteId" Type="Int32" Nullable="true" />
+          <Property Name="PlanoDados" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="SimCard">
           <Key>
@@ -473,6 +518,30 @@
           <End Type="GoTracker.Cliente" Role="Cliente" Multiplicity="0..1" />
           <End Type="GoTracker.SimCard" Role="SimCard" Multiplicity="0..1" />
         </Association>
+        <Association Name="ClienteMotorista">
+          <End Type="GoTracker.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="GoTracker.Motorista" Role="Motorista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Motorista">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClientePerfil">
+          <End Type="GoTracker.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="GoTracker.Perfil" Role="Perfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Perfil">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -519,6 +588,7 @@
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Telefone" ColumnName="Telefone" />
           <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -534,6 +604,8 @@
           <ScalarProperty Name="AcessoUsuario" ColumnName="AcessoUsuario" />
           <ScalarProperty Name="AcessoVeiculo" ColumnName="AcessoVeiculo" />
           <ScalarProperty Name="AcessoPerfil" ColumnName="AcessoPerfil" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="PlanoDados" ColumnName="PlanoDados" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

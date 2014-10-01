@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/23/2014 02:55:53
+-- Date Created: 09/30/2014 03:06:23
 -- Generated from EDMX file: C:\orb\GoTrackerModel\Models\GoTracker.edmx
 -- --------------------------------------------------
 
@@ -40,6 +40,12 @@ IF OBJECT_ID(N'[dbo].[FK_ClienteCliente]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_ClienteSimCard]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[SimCards] DROP CONSTRAINT [FK_ClienteSimCard];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ClienteMotorista]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Motoristas] DROP CONSTRAINT [FK_ClienteMotorista];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ClientePerfil]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Perfils] DROP CONSTRAINT [FK_ClientePerfil];
 GO
 
 -- --------------------------------------------------
@@ -109,7 +115,8 @@ CREATE TABLE [dbo].[Motoristas] (
     [VencimentoCNH] datetime  NOT NULL,
     [Email] nvarchar(max)  NOT NULL,
     [Telefone] nvarchar(max)  NOT NULL,
-    [Celular] nvarchar(max)  NOT NULL
+    [Celular] nvarchar(max)  NOT NULL,
+    [ClienteId] int  NULL
 );
 GO
 
@@ -123,7 +130,9 @@ CREATE TABLE [dbo].[Perfils] (
     [AcessoSimCard] int  NOT NULL,
     [AcessoUsuario] int  NOT NULL,
     [AcessoVeiculo] int  NOT NULL,
-    [AcessoPerfil] int  NOT NULL
+    [AcessoPerfil] int  NOT NULL,
+    [ClienteId] int  NULL,
+    [PlanoDados] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -336,6 +345,36 @@ GO
 CREATE INDEX [IX_FK_ClienteSimCard]
 ON [dbo].[SimCards]
     ([Cliente_Id]);
+GO
+
+-- Creating foreign key on [ClienteId] in table 'Motoristas'
+ALTER TABLE [dbo].[Motoristas]
+ADD CONSTRAINT [FK_ClienteMotorista]
+    FOREIGN KEY ([ClienteId])
+    REFERENCES [dbo].[Clientes]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ClienteMotorista'
+CREATE INDEX [IX_FK_ClienteMotorista]
+ON [dbo].[Motoristas]
+    ([ClienteId]);
+GO
+
+-- Creating foreign key on [ClienteId] in table 'Perfils'
+ALTER TABLE [dbo].[Perfils]
+ADD CONSTRAINT [FK_ClientePerfil]
+    FOREIGN KEY ([ClienteId])
+    REFERENCES [dbo].[Clientes]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ClientePerfil'
+CREATE INDEX [IX_FK_ClientePerfil]
+ON [dbo].[Perfils]
+    ([ClienteId]);
 GO
 
 -- --------------------------------------------------

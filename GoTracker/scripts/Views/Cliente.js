@@ -70,21 +70,22 @@ $(document).ready(function () {
                     applyEvents(function (index) {
                         model.selectedItem(index);
                     });
+                    model.items.valueHasMutated();
                 }
             });
         };
         this.gridViewModel = new ko.simpleGrid.viewModel({
             data: this.items,
             columns: [
-                { headerText: "Nome", rowText: "Nome" },
-                { headerText: "CNPJ", rowText: "CNPJ" },
-                { headerText: "Email", rowText: "Email" },
-                { headerText: "Telefone", rowText: "Telefone" },
-                { headerText: "Logradouro", rowText: "Logradouro" },
-                { headerText: "Cidade", rowText: "Cidade" },
-                { headerText: "UF", rowText: "Estado" },
-                { headerText: "Site", rowText: "WebSite" },
-                { headerText: "Observações", rowText: "Observacoes" }
+                { headerText: "Nome", rowText: "Nome()" },
+                { headerText: "CNPJ", rowText: "CNPJ()" },
+                { headerText: "Email", rowText: "Email()" },
+                { headerText: "Telefone", rowText: "Telefone()" },
+                { headerText: "Logradouro", rowText: "Logradouro()" },
+                { headerText: "Cidade", rowText: "Cidade()" },
+                { headerText: "UF", rowText: "Estado()" },
+                { headerText: "Site", rowText: "WebSite()" },
+                { headerText: "Observações", rowText: "Observacoes()" }
             ],
             pageSize: 10
         });

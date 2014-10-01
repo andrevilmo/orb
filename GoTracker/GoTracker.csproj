@@ -127,6 +127,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\EquipamentoController.cs" />
+    <Compile Include="Controllers\MotoristaController.cs" />
+    <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\SimCardController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -203,6 +206,13 @@
     <Content Include="Content\Template\images\logo.png" />
     <Content Include="Content\Template\images\orb-logo.png" />
     <Content Include="Content\Template\images\orb-megamenu.png" />
+    <Content Include="Content\Template\images\Perm1.gif" />
+    <Content Include="Content\Template\images\Perm2.gif" />
+    <Content Include="Content\Template\images\Perm3.gif" />
+    <Content Include="Content\Template\images\Perm4.gif" />
+    <Content Include="Content\Template\images\Perm5.gif" />
+    <Content Include="Content\Template\images\Perm6.gif" />
+    <Content Include="Content\Template\images\Perm7.gif" />
     <Content Include="Content\Template\images\pin.png" />
     <Content Include="Content\Template\images\search-white.png" />
     <Content Include="Content\Template\images\sprite-skin-orb.png" />
@@ -288,6 +298,9 @@
     <Content Include="scripts\koGrid-2.1.1.js" />
     <Content Include="scripts\magicsuggest-min.js" />
     <Content Include="scripts\magicsuggest.js" />
+    <Content Include="scripts\Views\Motorista.js" />
+    <Content Include="scripts\Views\Equipamento.js" />
+    <Content Include="scripts\Views\Perfil.js" />
     <Content Include="scripts\Views\SimCard.js" />
     <Content Include="scripts\Views\Cliente.js" />
     <Content Include="Web.config" />
@@ -407,6 +420,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Partials\Cadastros\_SimCardLista.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Motorista\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\Cadastros\_MotoristaLista.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Equipamento\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\Cadastros\_PerfilLista.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Perfil\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

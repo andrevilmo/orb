@@ -42,8 +42,22 @@ namespace GoTrackerWS.Controllers
                     var destino = db.Clientes.Where(x => x.Id == id_rel).First();
                     origem.Cliente = destino;
                     db.Entry(origem).State = EntityState.Modified;
-                } 
-                
+                }
+                else if (rel.Trim().ToString().Equals("clientedoveiculo"))
+                {
+                    var origem = db.Motoristas.Where(x => x.Id == id).First();
+                    var destino = db.Clientes.Where(x => x.Id == id_rel).First();
+                    origem.Cliente = destino;
+                    db.Entry(origem).State = EntityState.Modified;
+                }
+                else if (rel.Trim().ToString().Equals("clientedoequipamento"))
+                {
+                    var origem = db.Equipamentoes.Where(x => x.Id == id).First();
+                    var destino = db.Clientes.Where(x => x.Id == id_rel).First();
+                    origem.ClienteId = Int32.Parse( destino.ClienteId );
+                    db.Entry(origem).State = EntityState.Modified;
+                }
+                //clientedoequipamento
 
                 try
                 {

@@ -20,6 +20,8 @@
         <AssociationConnector Association="GoTracker.ClienteUsuario" />
         <AssociationConnector Association="GoTracker.ClienteCliente" />
         <AssociationConnector Association="GoTracker.ClienteSimCard" />
+        <AssociationConnector Association="GoTracker.ClienteMotorista" />
+        <AssociationConnector Association="GoTracker.ClientePerfil" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
