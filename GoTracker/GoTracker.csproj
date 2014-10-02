@@ -133,6 +133,7 @@
     <Compile Include="Controllers\SimCardController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -301,6 +302,7 @@
     <Content Include="scripts\Views\Motorista.js" />
     <Content Include="scripts\Views\Equipamento.js" />
     <Content Include="scripts\Views\Perfil.js" />
+    <Content Include="scripts\Views\Usuario.js" />
     <Content Include="scripts\Views\SimCard.js" />
     <Content Include="scripts\Views\Cliente.js" />
     <Content Include="Web.config" />
@@ -435,6 +437,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Perfil\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\Cadastros\_UsuarioLista.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
