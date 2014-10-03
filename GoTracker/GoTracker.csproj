@@ -134,6 +134,7 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\VeiculoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -302,6 +303,7 @@
     <Content Include="scripts\Views\Motorista.js" />
     <Content Include="scripts\Views\Equipamento.js" />
     <Content Include="scripts\Views\Perfil.js" />
+    <Content Include="scripts\Views\Veiculo.js" />
     <Content Include="scripts\Views\Usuario.js" />
     <Content Include="scripts\Views\SimCard.js" />
     <Content Include="scripts\Views\Cliente.js" />
@@ -443,6 +445,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Partials\Cadastros\_UsuarioLista.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Veiculo\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\Cadastros\_VeiculoLista.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

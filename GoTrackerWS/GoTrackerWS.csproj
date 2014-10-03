@@ -149,6 +149,7 @@
     <Compile Include="Controllers\SimCardController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VeiculoController.cs" />
     <Compile Include="CreateNavigationPropertyRoutingConvention.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
