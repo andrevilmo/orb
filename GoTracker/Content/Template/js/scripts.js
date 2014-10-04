@@ -554,7 +554,6 @@ window.urlApi = "http://localhost:9961/";
                 ykeys: ['iphone', 'ipad', 'ipadmini', 'itouch', 'imac'],
                 labels: ['iPhone', 'iPad', 'iPad Mini', 'iPod Touch', 'IMac'],
             }).on('click', function (i, row) {
-                console.log(i, row);
             });
 
         }
@@ -4165,22 +4164,13 @@ function applyEvents(f_click) {
     $('.ko-grid tbody tr td').off();
     $('.ko-grid tbody tr td').unbind();
     $('.ko-grid tbody tr td').click(function (ev, ev1) {
-        console.log("applyEvents");
         $('#powerwidgets').css('visibility', 'visible');
         $('.fa-chevron-circle-down').click();
         var selectedIndex = $($(ev.target).parent())[0].rowIndex - 1;
         if (f_click)
             f_click(selectedIndex);
         
-    });/*
-    $('.ko-grid-pageLinks > a').unbind();
-    $('.ko-grid-pageLinks > a').off();
-    $('.ko-grid-pageLinks > a').click(function () {
-        console.log('selected apply');
-        applyEvents(function (index) {
-            model.selectedItem(index);
-        });
-    });*/
+    });
 }
 function applyMasks() {
     $('.ddd').mask('(000)');
@@ -4195,7 +4185,7 @@ function saverel(id, id_rel, rel, ret) {
         contentType: "application/json; charset=utf-8",
         data: null,
         error: function (xhr, status) {
-            console.log(status);
+            //console.log(status);
         },
         success: function (result) {
             if (typeof (ret) == 'function')
@@ -4204,6 +4194,7 @@ function saverel(id, id_rel, rel, ret) {
     });
 }
 $(document).ready(function () {
+    $("body").fadeIn(4000);
     ko.bindingHandlers.dateControl = {
         init: function (element, valueAccessor, allBindingsAccessor) {
             var options = allBindingsAccessor().datepickerOptions || {},

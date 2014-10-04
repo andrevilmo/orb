@@ -13,7 +13,7 @@ $(document).ready(function () {
                 url: modelUrl,
                 type: 'GET',
                 error: function (xhr, status) {
-                    console.log(status);
+                    //console.log(status);
                 },
                 success: function (result) {
                     $(result.value).each(function () {
@@ -31,7 +31,7 @@ $(document).ready(function () {
                 url: window.urlApi + "odata/Cliente",
                 type: 'GET',
                 error: function (xhr, status) {
-                    console.log(status);
+                    //console.log(status);
                 },
                 success: function (result) {
                     $(result.value).each(function () {
@@ -50,8 +50,8 @@ $(document).ready(function () {
         };
         this.salvar = function () {
             var toSend = ko.utils.stringifyJson(ko.mapping.toJS(this.Selected()));
-            console.log(this.Selected());
-            console.log(toSend);
+            //console.log(this.Selected());
+            //console.log(toSend);
             $.ajax({
                 url: this.Selected().Id != null ? modelUrl + "(" + model.Selected().Id() + ")"
                                             : modelUrl,
@@ -60,7 +60,7 @@ $(document).ready(function () {
                 contentType: "application/json; charset=utf-8",
                 data: toSend,
                 error: function (xhr, status) {
-                    console.log(status);
+                    //console.log(status);
                 },
                 success: function (result) {
                     var saved = ko.mapping.fromJS(result);
@@ -72,11 +72,11 @@ $(document).ready(function () {
                     if (model.Cliente())
                         if (result)
                             saverel(saved.Id(), model.Cliente(), "clientedosimcard", function (data) {
-                                console.log(data);
+                                //console.log(data);
                             });
                         else
                             saverel(model.Selected().Id(), model.Cliente(), "clientedosimcard", function (data) {
-                                console.log(data);
+                                //console.log(data);
                             });
                     $('#powerwidgets').css('visibility', 'hidden');
                     $('.fa-chevron-circle-up').click();
@@ -87,7 +87,9 @@ $(document).ready(function () {
                 }
             });
         };
-        this.refresh = function (data) { console.log(data); };
+        this.refresh = function (data) {
+            //console.log(data);
+        };
         this.gridOptions = {
             data: self.items
             , footerVisible: false

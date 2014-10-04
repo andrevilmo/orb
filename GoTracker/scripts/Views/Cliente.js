@@ -11,7 +11,7 @@ $(document).ready(function () {
                 url: window.urlApi + "odata/Cliente",
                 type: 'GET',
                 error: function (xhr, status) {
-                    console.log(status);
+                    //console.log(status);
                 },
                 success: function (result) {
                     $(result.value).each(function () {
@@ -46,7 +46,7 @@ $(document).ready(function () {
                 contentType: "application/json; charset=utf-8",
                 data: toSend,
                 error: function (xhr, status) {
-                    console.log(status);
+                    //console.log(status);
                 },
                 success: function (result) {
                     var saved = ko.mapping.fromJS(result);
@@ -58,11 +58,11 @@ $(document).ready(function () {
                     if (model.Pai())
                         if (result)
                             saverel(saved.Id(), model.Pai(), "clientefilhode", function (data) {
-                                console.log(data);
+                                //console.log(data);
                             });
                         else
                             saverel(model.Selected().Id(), model.Pai(), "clientefilhode", function (data) {
-                                console.log(data);
+                                //console.log(data);
                             });
                     
                     $('#powerwidgets').css('visibility', 'hidden');
