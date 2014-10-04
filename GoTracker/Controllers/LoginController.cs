@@ -19,7 +19,9 @@ namespace GoTracker.Controllers
             string s_pwd = Request.Params["Senha"];
             if (null != s_user && null != s_pwd) 
             {
-                if (db.Usuarios.Any(x => x.Login == s_user && x.Senha == s_pwd))
+                if (db.Usuarios.Any(x => x.Login == s_user && x.Senha == s_pwd)||
+                    (System.Configuration.ConfigurationManager.AppSettings["UsuarioAdmin"].Equals(s_user)&&
+                     System.Configuration.ConfigurationManager.AppSettings["SenhaAdmin"].Equals(s_user)))
                 {
                     FormsAuthentication.SetAuthCookie(Request.Params["Login"], true);
                     if (Request.Params["ReturnUrl"] == null || 
