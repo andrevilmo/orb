@@ -141,12 +141,19 @@
     <Compile Include="Controllers\ClienteController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\DadoAcessorioController.cs" />
+    <Compile Include="Controllers\DadoAdicionalController.cs" />
+    <Compile Include="Controllers\DadoGSMController.cs" />
+    <Compile Include="Controllers\DadoLidoController.cs" />
+    <Compile Include="Controllers\DadoLivreController.cs" />
+    <Compile Include="Controllers\DadoSateliteController.cs" />
     <Compile Include="Controllers\EquipamentoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MotoristaController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\RelationsController.cs" />
     <Compile Include="Controllers\SimCardController.cs" />
+    <Compile Include="Controllers\UltimoDadoLidoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VeiculoController.cs" />

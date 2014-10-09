@@ -33,5 +33,12 @@ namespace GoTrackerModel.Models
         public DbSet<SimCard> SimCards { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Veiculo> Veiculoes { get; set; }
+        public DbSet<DadoAcessorio> DadoAcessorios { get; set; }
+        public DbSet<DadoAdicional_MXT> DadoAdicional_MXT { get; set; }
+        public DbSet<DadoGSM> DadoGSMs { get; set; }
+        public DbSet<DadoLido> DadoLidoes { get; set; }
+        public DbSet<DadoLivre> DadoLivres { get; set; }
+        public DbSet<DadoSatelite> DadoSatelites { get; set; }
+        public DbSet<Ultimo_DadoLido> Ultimo_DadoLido { get; set; }
     }
 }

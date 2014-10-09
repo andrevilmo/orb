@@ -49,6 +49,24 @@
     <Compile Include="Models\Cliente.cs">
       <DependentUpon>GoTracker.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DadoAcessorio.cs">
+      <DependentUpon>GoTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DadoAdicional_MXT.cs">
+      <DependentUpon>GoTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DadoGSM.cs">
+      <DependentUpon>GoTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DadoLido.cs">
+      <DependentUpon>GoTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DadoLivre.cs">
+      <DependentUpon>GoTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DadoSatelite.cs">
+      <DependentUpon>GoTracker.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Equipamento.cs">
       <DependentUpon>GoTracker.tt</DependentUpon>
     </Compile>
@@ -74,6 +92,9 @@
       <DependentUpon>GoTracker.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SimCard.cs">
+      <DependentUpon>GoTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ultimo_DadoLido.cs">
       <DependentUpon>GoTracker.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">

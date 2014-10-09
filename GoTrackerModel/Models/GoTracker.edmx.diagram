@@ -22,6 +22,18 @@
         <AssociationConnector Association="GoTracker.ClienteSimCard" />
         <AssociationConnector Association="GoTracker.ClienteMotorista" />
         <AssociationConnector Association="GoTracker.ClientePerfil" />
+        <EntityTypeShape EntityType="GoTracker.DadoAcessorio" Width="1.5" PointX="10.625" PointY="5.125" />
+        <EntityTypeShape EntityType="GoTracker.DadoAdicional_MXT" Width="1.5" PointX="10.625" PointY="14.875" />
+        <EntityTypeShape EntityType="GoTracker.DadoGSM" Width="1.5" PointX="10.625" PointY="11.5" />
+        <EntityTypeShape EntityType="GoTracker.DadoLido" Width="1.5" PointX="8.375" PointY="7.125" />
+        <EntityTypeShape EntityType="GoTracker.DadoLivre" Width="1.5" PointX="10.625" PointY="8.375" />
+        <EntityTypeShape EntityType="GoTracker.DadoSatelite" Width="1.5" PointX="10.625" PointY="1.75" />
+        <EntityTypeShape EntityType="GoTracker.Ultimo_DadoLido" Width="1.5" PointX="13.375" PointY="0.75" />
+        <AssociationConnector Association="GoTracker.FK_DadoAcessorio_x_DadoLido" />
+        <AssociationConnector Association="GoTracker.FK_DadoAdicional_x_DadoLido" />
+        <AssociationConnector Association="GoTracker.FK_DadoGSM_x_DadoLido" />
+        <AssociationConnector Association="GoTracker.FK_DadoLivre_x_DadoLido" />
+        <AssociationConnector Association="GoTracker.FK_DadoSatelite_x_DadoLido" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -13,6 +13,13 @@
     <EntitySet Name="SimCards" EntityType="GoTracker.Store.SimCards" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Usuarios" EntityType="GoTracker.Store.Usuarios" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Veiculoes" EntityType="GoTracker.Store.Veiculoes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DadoAcessorios" EntityType="GoTracker.Store.DadoAcessorios" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DadoAdicional_MXT" EntityType="GoTracker.Store.DadoAdicional_MXT" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DadoGSMs" EntityType="GoTracker.Store.DadoGSMs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DadoLidoes" EntityType="GoTracker.Store.DadoLidoes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DadoLivres" EntityType="GoTracker.Store.DadoLivres" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DadoSatelites" EntityType="GoTracker.Store.DadoSatelites" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Ultimo_DadoLido" EntityType="GoTracker.Store.Ultimo_DadoLido" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ClienteVeiculo" Association="GoTracker.Store.FK_ClienteVeiculo">
       <End Role="Cliente" EntitySet="Clientes" />
       <End Role="Veiculo" EntitySet="Veiculoes" />
@@ -52,6 +59,26 @@
     <AssociationSet Name="ClientePerfil" Association="GoTracker.Store.ClientePerfil">
       <End Role="Cliente" EntitySet="Clientes" />
       <End Role="Perfil" EntitySet="Perfils" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DadoAcessorio_x_DadoLido" Association="GoTracker.Store.FK_DadoAcessorio_x_DadoLido">
+      <End Role="DadoLido" EntitySet="DadoLidoes" />
+      <End Role="DadoAcessorio" EntitySet="DadoAcessorios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DadoAdicional_x_DadoLido" Association="GoTracker.Store.FK_DadoAdicional_x_DadoLido">
+      <End Role="DadoLido" EntitySet="DadoLidoes" />
+      <End Role="DadoAdicional_MXT" EntitySet="DadoAdicional_MXT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DadoGSM_x_DadoLido" Association="GoTracker.Store.FK_DadoGSM_x_DadoLido">
+      <End Role="DadoLido" EntitySet="DadoLidoes" />
+      <End Role="DadoGSM" EntitySet="DadoGSMs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DadoLivre_x_DadoLido" Association="GoTracker.Store.FK_DadoLivre_x_DadoLido">
+      <End Role="DadoLido" EntitySet="DadoLidoes" />
+      <End Role="DadoLivre" EntitySet="DadoLivres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DadoSatelite_x_DadoLido" Association="GoTracker.Store.FK_DadoSatelite_x_DadoLido">
+      <End Role="DadoLido" EntitySet="DadoLidoes" />
+      <End Role="DadoSatelite" EntitySet="DadoSatelites" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clientes">
@@ -152,6 +179,167 @@
     <Property Name="MotoristaId" Type="int" Nullable="false" />
     <Property Name="ClienteId" Type="int" Nullable="false" />
     <Property Name="Equipamento_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DadoAcessorios">
+    <Key>
+      <PropertyRef Name="idDadoAcessorio" />
+    </Key>
+    <Property Name="idDadoAcessorio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDadoLido" Type="int" Nullable="false" />
+    <Property Name="DadoSerial" Type="int" Nullable="false" />
+    <Property Name="AcessorioSerial" Type="int" Nullable="false" />
+    <Property Name="AcessorioBatteryLevel" Type="int" Nullable="true" />
+    <Property Name="AcessorioButtonStatus" Type="int" Nullable="true" />
+    <Property Name="AcessorioInternalTemperature" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="DadoAdicional_MXT">
+    <Key>
+      <PropertyRef Name="idDadoAdicional" />
+    </Key>
+    <Property Name="idDadoAdicional" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDadoLido" Type="int" Nullable="false" />
+    <Property Name="LifeTime" Type="int" Nullable="true" />
+    <Property Name="PositionInformation" Type="int" Nullable="true" />
+    <Property Name="AccelerometerEvent" Type="int" Nullable="true" />
+    <Property Name="AccelerometerValue" Type="int" Nullable="true" />
+    <Property Name="CellPresent" Type="tinyint" Nullable="true" />
+    <Property Name="VoiceCall" Type="tinyint" Nullable="true" />
+    <Property Name="LatitudeSad69" Type="float" Nullable="true" />
+    <Property Name="LongitudeSad69" Type="float" Nullable="true" />
+    <Property Name="Utm" Type="varchar" Nullable="true" MaxLength="45" />
+    <Property Name="Easting" Type="float" Nullable="true" />
+    <Property Name="Northing" Type="float" Nullable="true" />
+    <Property Name="TamperingIsOpen" Type="tinyint" Nullable="true" />
+    <Property Name="InternalAlarm" Type="tinyint" Nullable="true" />
+    <Property Name="AccessoryMissing" Type="tinyint" Nullable="true" />
+    <Property Name="DetailedSupply" Type="float" Nullable="true" />
+    <Property Name="Ad4" Type="float" Nullable="true" />
+    <Property Name="DriverId" Type="int" Nullable="true" />
+    <Property Name="RouteId" Type="int" Nullable="true" />
+    <Property Name="PointAnalise" Type="tinyint" Nullable="true" />
+    <Property Name="AccessoryCount" Type="int" Nullable="true" />
+    <Property Name="BatteryCharging" Type="tinyint" Nullable="true" />
+    <Property Name="BatteryFailure" Type="tinyint" Nullable="true" />
+    <Property Name="PointId" Type="int" Nullable="true" />
+    <Property Name="PointIn" Type="tinyint" Nullable="true" />
+    <Property Name="PointOut" Type="tinyint" Nullable="true" />
+  </EntityType>
+  <EntityType Name="DadoGSMs">
+    <Key>
+      <PropertyRef Name="idDadoGSM" />
+    </Key>
+    <Property Name="idDadoGSM" Type="int" Nullable="false" />
+    <Property Name="idDadoLido" Type="int" Nullable="false" />
+    <Property Name="DadoSerial" Type="int" Nullable="false" />
+    <Property Name="DadoLAC" Type="varchar" Nullable="false" MaxLength="45" />
+    <Property Name="DadoMNC" Type="varchar" Nullable="false" MaxLength="45" />
+    <Property Name="DadoMCC" Type="varchar" Nullable="false" MaxLength="45" />
+    <Property Name="DadoCellId" Type="varchar" Nullable="false" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="DadoLidoes">
+    <Key>
+      <PropertyRef Name="idDadoLido" />
+    </Key>
+    <Property Name="idDadoLido" Type="int" Nullable="false" />
+    <Property Name="Serial" Type="int" Nullable="false" />
+    <Property Name="Protocol" Type="int" Nullable="false" />
+    <Property Name="MemoryIndex" Type="int" Nullable="false" />
+    <Property Name="Hourmeter" Type="int" Nullable="false" />
+    <Property Name="PacketReason" Type="int" Nullable="true" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="SystemDate" Type="datetime" Nullable="false" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="Course" Type="int" Nullable="true" />
+    <Property Name="Speed" Type="int" Nullable="true" />
+    <Property Name="GprsConn" Type="tinyint" Nullable="true" />
+    <Property Name="GpsSignal" Type="tinyint" Nullable="true" />
+    <Property Name="GpsAntFail" Type="tinyint" Nullable="true" />
+    <Property Name="GpsAntDisc" Type="tinyint" Nullable="true" />
+    <Property Name="GpsSleep" Type="tinyint" Nullable="true" />
+    <Property Name="GsmJamming" Type="tinyint" Nullable="true" />
+    <Property Name="Moving" Type="tinyint" Nullable="true" />
+    <Property Name="Temperature" Type="float" Nullable="true" />
+    <Property Name="PowerSupply" Type="float" Nullable="true" />
+    <Property Name="Ignition" Type="tinyint" Nullable="true" />
+    <Property Name="Panic" Type="tinyint" Nullable="true" />
+    <Property Name="Inputs" Type="int" Nullable="true" />
+    <Property Name="Outputs" Type="int" Nullable="true" />
+    <Property Name="AnalogInputs" Type="int" Nullable="true" />
+    <Property Name="BatteryUsed" Type="float" Nullable="true" />
+    <Property Name="AntiTheftStatus" Type="int" Nullable="true" />
+    <Property Name="Hodometer" Type="bigint" Nullable="true" />
+    <Property Name="Rpm" Type="int" Nullable="true" />
+    <Property Name="DriverId" Type="int" Nullable="true" />
+    <Property Name="AccessoryExists" Type="tinyint" Nullable="true" />
+    <Property Name="OpenDataExists" Type="tinyint" Nullable="true" />
+    <Property Name="Ipv4" Type="varchar" Nullable="true" MaxLength="45" />
+    <Property Name="GenerationDate" Type="datetime" Nullable="true" />
+    <Property Name="PacketSize" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="DadoLivres">
+    <Key>
+      <PropertyRef Name="idDadoLivre" />
+    </Key>
+    <Property Name="idDadoLivre" Type="int" Nullable="false" />
+    <Property Name="idDadoLido" Type="int" Nullable="false" />
+    <Property Name="DadoSerial" Type="int" Nullable="false" />
+    <Property Name="DadoString" Type="varchar" Nullable="false" MaxLength="45" />
+    <Property Name="DadoDH" Type="datetime" Nullable="false" />
+    <Property Name="DadoDHS" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DadoSatelites">
+    <Key>
+      <PropertyRef Name="idDadoSatelite" />
+    </Key>
+    <Property Name="idDadoSatelite" Type="int" Nullable="false" />
+    <Property Name="idDadoLido" Type="int" Nullable="false" />
+    <Property Name="DadoSerial" Type="int" Nullable="false" />
+    <Property Name="DadoCSQ" Type="int" Nullable="false" />
+    <Property Name="DadoSVN" Type="int" Nullable="false" />
+    <Property Name="DadoSNR" Type="int" Nullable="false" />
+    <Property Name="DadoHDOP" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ultimo_DadoLido">
+    <Key>
+      <PropertyRef Name="idUltimoDadoLido" />
+    </Key>
+    <Property Name="idUltimoDadoLido" Type="int" Nullable="false" />
+    <Property Name="Serial" Type="int" Nullable="false" />
+    <Property Name="Protocol" Type="int" Nullable="false" />
+    <Property Name="MemoryIndex" Type="int" Nullable="false" />
+    <Property Name="Hourmeter" Type="int" Nullable="false" />
+    <Property Name="PacketReason" Type="int" Nullable="true" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="SystemDate" Type="datetime" Nullable="false" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="Course" Type="int" Nullable="true" />
+    <Property Name="Speed" Type="int" Nullable="true" />
+    <Property Name="GprsConn" Type="tinyint" Nullable="true" />
+    <Property Name="GpsSignal" Type="tinyint" Nullable="true" />
+    <Property Name="GpsAntFail" Type="tinyint" Nullable="true" />
+    <Property Name="GpsAntDisc" Type="tinyint" Nullable="true" />
+    <Property Name="GpsSleep" Type="tinyint" Nullable="true" />
+    <Property Name="GsmJamming" Type="tinyint" Nullable="true" />
+    <Property Name="Moving" Type="tinyint" Nullable="true" />
+    <Property Name="Temperature" Type="float" Nullable="true" />
+    <Property Name="PowerSupply" Type="float" Nullable="true" />
+    <Property Name="Ignition" Type="tinyint" Nullable="true" />
+    <Property Name="Panic" Type="tinyint" Nullable="true" />
+    <Property Name="Inputs" Type="int" Nullable="true" />
+    <Property Name="Outputs" Type="int" Nullable="true" />
+    <Property Name="AnalogInputs" Type="int" Nullable="true" />
+    <Property Name="BatteryUsed" Type="float" Nullable="true" />
+    <Property Name="AntiTheftStatus" Type="int" Nullable="true" />
+    <Property Name="Hodometer" Type="bigint" Nullable="true" />
+    <Property Name="Rpm" Type="int" Nullable="true" />
+    <Property Name="DriverId" Type="int" Nullable="true" />
+    <Property Name="AccessoryExists" Type="tinyint" Nullable="true" />
+    <Property Name="OpenDataExists" Type="tinyint" Nullable="true" />
+    <Property Name="Ipv4" Type="varchar" Nullable="true" MaxLength="45" />
+    <Property Name="GenerationDate" Type="datetime" Nullable="true" />
+    <Property Name="PacketSize" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="FK_ClienteVeiculo">
     <End Role="Cliente" Type="GoTracker.Store.Clientes" Multiplicity="1" />
@@ -273,6 +461,66 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DadoAcessorio_x_DadoLido">
+    <End Role="DadoLido" Type="GoTracker.Store.DadoLidoes" Multiplicity="1" />
+    <End Role="DadoAcessorio" Type="GoTracker.Store.DadoAcessorios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DadoLido">
+        <PropertyRef Name="idDadoLido" />
+      </Principal>
+      <Dependent Role="DadoAcessorio">
+        <PropertyRef Name="idDadoLido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DadoAdicional_x_DadoLido">
+    <End Role="DadoLido" Type="GoTracker.Store.DadoLidoes" Multiplicity="1" />
+    <End Role="DadoAdicional_MXT" Type="GoTracker.Store.DadoAdicional_MXT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DadoLido">
+        <PropertyRef Name="idDadoLido" />
+      </Principal>
+      <Dependent Role="DadoAdicional_MXT">
+        <PropertyRef Name="idDadoLido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DadoGSM_x_DadoLido">
+    <End Role="DadoLido" Type="GoTracker.Store.DadoLidoes" Multiplicity="1" />
+    <End Role="DadoGSM" Type="GoTracker.Store.DadoGSMs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DadoLido">
+        <PropertyRef Name="idDadoLido" />
+      </Principal>
+      <Dependent Role="DadoGSM">
+        <PropertyRef Name="idDadoLido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DadoLivre_x_DadoLido">
+    <End Role="DadoLido" Type="GoTracker.Store.DadoLidoes" Multiplicity="1" />
+    <End Role="DadoLivre" Type="GoTracker.Store.DadoLivres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DadoLido">
+        <PropertyRef Name="idDadoLido" />
+      </Principal>
+      <Dependent Role="DadoLivre">
+        <PropertyRef Name="idDadoLido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DadoSatelite_x_DadoLido">
+    <End Role="DadoLido" Type="GoTracker.Store.DadoLidoes" Multiplicity="1" />
+    <End Role="DadoSatelite" Type="GoTracker.Store.DadoSatelites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DadoLido">
+        <PropertyRef Name="idDadoLido" />
+      </Principal>
+      <Dependent Role="DadoSatelite">
+        <PropertyRef Name="idDadoLido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -325,6 +573,33 @@
             <End Role="Cliente" EntitySet="Clientes" />
             <End Role="Perfil" EntitySet="Perfils" />
           </AssociationSet>
+          <EntitySet Name="DadoAcessorios" EntityType="GoTracker.DadoAcessorio" />
+          <EntitySet Name="DadoAdicional_MXT" EntityType="GoTracker.DadoAdicional_MXT" />
+          <EntitySet Name="DadoGSMs" EntityType="GoTracker.DadoGSM" />
+          <EntitySet Name="DadoLidoes" EntityType="GoTracker.DadoLido" />
+          <EntitySet Name="DadoLivres" EntityType="GoTracker.DadoLivre" />
+          <EntitySet Name="DadoSatelites" EntityType="GoTracker.DadoSatelite" />
+          <EntitySet Name="Ultimo_DadoLido" EntityType="GoTracker.Ultimo_DadoLido" />
+          <AssociationSet Name="FK_DadoAcessorio_x_DadoLido" Association="GoTracker.FK_DadoAcessorio_x_DadoLido">
+            <End Role="DadoLido" EntitySet="DadoLidoes" />
+            <End Role="DadoAcessorio" EntitySet="DadoAcessorios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DadoAdicional_x_DadoLido" Association="GoTracker.FK_DadoAdicional_x_DadoLido">
+            <End Role="DadoLido" EntitySet="DadoLidoes" />
+            <End Role="DadoAdicional_MXT" EntitySet="DadoAdicional_MXT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DadoGSM_x_DadoLido" Association="GoTracker.FK_DadoGSM_x_DadoLido">
+            <End Role="DadoLido" EntitySet="DadoLidoes" />
+            <End Role="DadoGSM" EntitySet="DadoGSMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DadoLivre_x_DadoLido" Association="GoTracker.FK_DadoLivre_x_DadoLido">
+            <End Role="DadoLido" EntitySet="DadoLidoes" />
+            <End Role="DadoLivre" EntitySet="DadoLivres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DadoSatelite_x_DadoLido" Association="GoTracker.FK_DadoSatelite_x_DadoLido">
+            <End Role="DadoLido" EntitySet="DadoLidoes" />
+            <End Role="DadoSatelite" EntitySet="DadoSatelites" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cliente">
           <Key>
@@ -332,7 +607,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClienteId" Nullable="true" Type="String" />
+          <Property Name="ClienteId" Nullable="true" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="CNPJ" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Telefone" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -389,7 +664,7 @@
           <Property Name="AcessoPerfil" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Usuarios" Relationship="GoTracker.FK_PerfilUsuario" FromRole="Perfil" ToRole="Usuario" />
           <Property Name="ClienteId" Type="Int32" Nullable="true" />
-          <Property Name="PlanoDados" Type="String" Nullable="false" />
+          <Property Name="PlanoDados" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
         <EntityType Name="SimCard">
           <Key>
@@ -542,6 +817,237 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DadoAcessorio">
+          <Key>
+            <PropertyRef Name="idDadoAcessorio" />
+          </Key>
+          <Property Name="idDadoAcessorio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idDadoLido" Type="Int32" Nullable="false" />
+          <Property Name="DadoSerial" Type="Int32" Nullable="false" />
+          <Property Name="AcessorioSerial" Type="Int32" Nullable="false" />
+          <Property Name="AcessorioBatteryLevel" Type="Int32" />
+          <Property Name="AcessorioButtonStatus" Type="Int32" />
+          <Property Name="AcessorioInternalTemperature" Type="Int32" />
+          <NavigationProperty Name="DadoLido" Relationship="GoTracker.FK_DadoAcessorio_x_DadoLido" FromRole="DadoAcessorio" ToRole="DadoLido" />
+        </EntityType>
+        <EntityType Name="DadoAdicional_MXT">
+          <Key>
+            <PropertyRef Name="idDadoAdicional" />
+          </Key>
+          <Property Name="idDadoAdicional" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idDadoLido" Type="Int32" Nullable="false" />
+          <Property Name="LifeTime" Type="Int32" />
+          <Property Name="PositionInformation" Type="Int32" />
+          <Property Name="AccelerometerEvent" Type="Int32" />
+          <Property Name="AccelerometerValue" Type="Int32" />
+          <Property Name="CellPresent" Type="Byte" />
+          <Property Name="VoiceCall" Type="Byte" />
+          <Property Name="LatitudeSad69" Type="Double" />
+          <Property Name="LongitudeSad69" Type="Double" />
+          <Property Name="Utm" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Easting" Type="Double" />
+          <Property Name="Northing" Type="Double" />
+          <Property Name="TamperingIsOpen" Type="Byte" />
+          <Property Name="InternalAlarm" Type="Byte" />
+          <Property Name="AccessoryMissing" Type="Byte" />
+          <Property Name="DetailedSupply" Type="Double" />
+          <Property Name="Ad4" Type="Double" />
+          <Property Name="DriverId" Type="Int32" />
+          <Property Name="RouteId" Type="Int32" />
+          <Property Name="PointAnalise" Type="Byte" />
+          <Property Name="AccessoryCount" Type="Int32" />
+          <Property Name="BatteryCharging" Type="Byte" />
+          <Property Name="BatteryFailure" Type="Byte" />
+          <Property Name="PointId" Type="Int32" />
+          <Property Name="PointIn" Type="Byte" />
+          <Property Name="PointOut" Type="Byte" />
+          <NavigationProperty Name="DadoLido" Relationship="GoTracker.FK_DadoAdicional_x_DadoLido" FromRole="DadoAdicional_MXT" ToRole="DadoLido" />
+        </EntityType>
+        <EntityType Name="DadoGSM">
+          <Key>
+            <PropertyRef Name="idDadoGSM" />
+          </Key>
+          <Property Name="idDadoGSM" Type="Int32" Nullable="false" />
+          <Property Name="idDadoLido" Type="Int32" Nullable="false" />
+          <Property Name="DadoSerial" Type="Int32" Nullable="false" />
+          <Property Name="DadoLAC" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="DadoMNC" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="DadoMCC" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="DadoCellId" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DadoLido" Relationship="GoTracker.FK_DadoGSM_x_DadoLido" FromRole="DadoGSM" ToRole="DadoLido" />
+        </EntityType>
+        <EntityType Name="DadoLido">
+          <Key>
+            <PropertyRef Name="idDadoLido" />
+          </Key>
+          <Property Name="idDadoLido" Type="Int32" Nullable="false" />
+          <Property Name="Serial" Type="Int32" Nullable="false" />
+          <Property Name="Protocol" Type="Int32" Nullable="false" />
+          <Property Name="MemoryIndex" Type="Int32" Nullable="false" />
+          <Property Name="Hourmeter" Type="Int32" Nullable="false" />
+          <Property Name="PacketReason" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SystemDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Course" Type="Int32" />
+          <Property Name="Speed" Type="Int32" />
+          <Property Name="GprsConn" Type="Byte" />
+          <Property Name="GpsSignal" Type="Byte" />
+          <Property Name="GpsAntFail" Type="Byte" />
+          <Property Name="GpsAntDisc" Type="Byte" />
+          <Property Name="GpsSleep" Type="Byte" />
+          <Property Name="GsmJamming" Type="Byte" />
+          <Property Name="Moving" Type="Byte" />
+          <Property Name="Temperature" Type="Double" />
+          <Property Name="PowerSupply" Type="Double" />
+          <Property Name="Ignition" Type="Byte" />
+          <Property Name="Panic" Type="Byte" />
+          <Property Name="Inputs" Type="Int32" />
+          <Property Name="Outputs" Type="Int32" />
+          <Property Name="AnalogInputs" Type="Int32" />
+          <Property Name="BatteryUsed" Type="Double" />
+          <Property Name="AntiTheftStatus" Type="Int32" />
+          <Property Name="Hodometer" Type="Int64" />
+          <Property Name="Rpm" Type="Int32" />
+          <Property Name="DriverId" Type="Int32" />
+          <Property Name="AccessoryExists" Type="Byte" />
+          <Property Name="OpenDataExists" Type="Byte" />
+          <Property Name="Ipv4" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="GenerationDate" Type="DateTime" Precision="3" />
+          <Property Name="PacketSize" Type="Int32" />
+          <NavigationProperty Name="DadoAcessorios" Relationship="GoTracker.FK_DadoAcessorio_x_DadoLido" FromRole="DadoLido" ToRole="DadoAcessorio" />
+          <NavigationProperty Name="DadoAdicional_MXT" Relationship="GoTracker.FK_DadoAdicional_x_DadoLido" FromRole="DadoLido" ToRole="DadoAdicional_MXT" />
+          <NavigationProperty Name="DadoGSMs" Relationship="GoTracker.FK_DadoGSM_x_DadoLido" FromRole="DadoLido" ToRole="DadoGSM" />
+          <NavigationProperty Name="DadoLivres" Relationship="GoTracker.FK_DadoLivre_x_DadoLido" FromRole="DadoLido" ToRole="DadoLivre" />
+          <NavigationProperty Name="DadoSatelites" Relationship="GoTracker.FK_DadoSatelite_x_DadoLido" FromRole="DadoLido" ToRole="DadoSatelite" />
+        </EntityType>
+        <EntityType Name="DadoLivre">
+          <Key>
+            <PropertyRef Name="idDadoLivre" />
+          </Key>
+          <Property Name="idDadoLivre" Type="Int32" Nullable="false" />
+          <Property Name="idDadoLido" Type="Int32" Nullable="false" />
+          <Property Name="DadoSerial" Type="Int32" Nullable="false" />
+          <Property Name="DadoString" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="DadoDH" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DadoDHS" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DadoLido" Relationship="GoTracker.FK_DadoLivre_x_DadoLido" FromRole="DadoLivre" ToRole="DadoLido" />
+        </EntityType>
+        <EntityType Name="DadoSatelite">
+          <Key>
+            <PropertyRef Name="idDadoSatelite" />
+          </Key>
+          <Property Name="idDadoSatelite" Type="Int32" Nullable="false" />
+          <Property Name="idDadoLido" Type="Int32" Nullable="false" />
+          <Property Name="DadoSerial" Type="Int32" Nullable="false" />
+          <Property Name="DadoCSQ" Type="Int32" Nullable="false" />
+          <Property Name="DadoSVN" Type="Int32" Nullable="false" />
+          <Property Name="DadoSNR" Type="Int32" Nullable="false" />
+          <Property Name="DadoHDOP" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DadoLido" Relationship="GoTracker.FK_DadoSatelite_x_DadoLido" FromRole="DadoSatelite" ToRole="DadoLido" />
+        </EntityType>
+        <EntityType Name="Ultimo_DadoLido">
+          <Key>
+            <PropertyRef Name="idUltimoDadoLido" />
+          </Key>
+          <Property Name="idUltimoDadoLido" Type="Int32" Nullable="false" />
+          <Property Name="Serial" Type="Int32" Nullable="false" />
+          <Property Name="Protocol" Type="Int32" Nullable="false" />
+          <Property Name="MemoryIndex" Type="Int32" Nullable="false" />
+          <Property Name="Hourmeter" Type="Int32" Nullable="false" />
+          <Property Name="PacketReason" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SystemDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Course" Type="Int32" />
+          <Property Name="Speed" Type="Int32" />
+          <Property Name="GprsConn" Type="Byte" />
+          <Property Name="GpsSignal" Type="Byte" />
+          <Property Name="GpsAntFail" Type="Byte" />
+          <Property Name="GpsAntDisc" Type="Byte" />
+          <Property Name="GpsSleep" Type="Byte" />
+          <Property Name="GsmJamming" Type="Byte" />
+          <Property Name="Moving" Type="Byte" />
+          <Property Name="Temperature" Type="Double" />
+          <Property Name="PowerSupply" Type="Double" />
+          <Property Name="Ignition" Type="Byte" />
+          <Property Name="Panic" Type="Byte" />
+          <Property Name="Inputs" Type="Int32" />
+          <Property Name="Outputs" Type="Int32" />
+          <Property Name="AnalogInputs" Type="Int32" />
+          <Property Name="BatteryUsed" Type="Double" />
+          <Property Name="AntiTheftStatus" Type="Int32" />
+          <Property Name="Hodometer" Type="Int64" />
+          <Property Name="Rpm" Type="Int32" />
+          <Property Name="DriverId" Type="Int32" />
+          <Property Name="AccessoryExists" Type="Byte" />
+          <Property Name="OpenDataExists" Type="Byte" />
+          <Property Name="Ipv4" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="GenerationDate" Type="DateTime" Precision="3" />
+          <Property Name="PacketSize" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_DadoAcessorio_x_DadoLido">
+          <End Type="GoTracker.DadoLido" Role="DadoLido" Multiplicity="1" />
+          <End Type="GoTracker.DadoAcessorio" Role="DadoAcessorio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DadoLido">
+              <PropertyRef Name="idDadoLido" />
+            </Principal>
+            <Dependent Role="DadoAcessorio">
+              <PropertyRef Name="idDadoLido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DadoAdicional_x_DadoLido">
+          <End Type="GoTracker.DadoLido" Role="DadoLido" Multiplicity="1" />
+          <End Type="GoTracker.DadoAdicional_MXT" Role="DadoAdicional_MXT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DadoLido">
+              <PropertyRef Name="idDadoLido" />
+            </Principal>
+            <Dependent Role="DadoAdicional_MXT">
+              <PropertyRef Name="idDadoLido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DadoGSM_x_DadoLido">
+          <End Type="GoTracker.DadoLido" Role="DadoLido" Multiplicity="1" />
+          <End Type="GoTracker.DadoGSM" Role="DadoGSM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DadoLido">
+              <PropertyRef Name="idDadoLido" />
+            </Principal>
+            <Dependent Role="DadoGSM">
+              <PropertyRef Name="idDadoLido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DadoLivre_x_DadoLido">
+          <End Type="GoTracker.DadoLido" Role="DadoLido" Multiplicity="1" />
+          <End Type="GoTracker.DadoLivre" Role="DadoLivre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DadoLido">
+              <PropertyRef Name="idDadoLido" />
+            </Principal>
+            <Dependent Role="DadoLivre">
+              <PropertyRef Name="idDadoLido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DadoSatelite_x_DadoLido">
+          <End Type="GoTracker.DadoLido" Role="DadoLido" Multiplicity="1" />
+          <End Type="GoTracker.DadoSatelite" Role="DadoSatelite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DadoLido">
+              <PropertyRef Name="idDadoLido" />
+            </Principal>
+            <Dependent Role="DadoSatelite">
+              <PropertyRef Name="idDadoLido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -649,6 +1155,174 @@
           <ScalarProperty Name="MotoristaId" ColumnName="MotoristaId" />
           <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
           <ScalarProperty Name="Equipamento_Id" ColumnName="Equipamento_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DadoAcessorios">
+      <EntityTypeMapping TypeName="IsTypeOf(GoTracker.DadoAcessorio)">
+        <MappingFragment StoreEntitySet="DadoAcessorios">
+          <ScalarProperty Name="idDadoAcessorio" ColumnName="idDadoAcessorio" />
+          <ScalarProperty Name="idDadoLido" ColumnName="idDadoLido" />
+          <ScalarProperty Name="DadoSerial" ColumnName="DadoSerial" />
+          <ScalarProperty Name="AcessorioSerial" ColumnName="AcessorioSerial" />
+          <ScalarProperty Name="AcessorioBatteryLevel" ColumnName="AcessorioBatteryLevel" />
+          <ScalarProperty Name="AcessorioButtonStatus" ColumnName="AcessorioButtonStatus" />
+          <ScalarProperty Name="AcessorioInternalTemperature" ColumnName="AcessorioInternalTemperature" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DadoAdicional_MXT">
+      <EntityTypeMapping TypeName="IsTypeOf(GoTracker.DadoAdicional_MXT)">
+        <MappingFragment StoreEntitySet="DadoAdicional_MXT">
+          <ScalarProperty Name="idDadoAdicional" ColumnName="idDadoAdicional" />
+          <ScalarProperty Name="idDadoLido" ColumnName="idDadoLido" />
+          <ScalarProperty Name="LifeTime" ColumnName="LifeTime" />
+          <ScalarProperty Name="PositionInformation" ColumnName="PositionInformation" />
+          <ScalarProperty Name="AccelerometerEvent" ColumnName="AccelerometerEvent" />
+          <ScalarProperty Name="AccelerometerValue" ColumnName="AccelerometerValue" />
+          <ScalarProperty Name="CellPresent" ColumnName="CellPresent" />
+          <ScalarProperty Name="VoiceCall" ColumnName="VoiceCall" />
+          <ScalarProperty Name="LatitudeSad69" ColumnName="LatitudeSad69" />
+          <ScalarProperty Name="LongitudeSad69" ColumnName="LongitudeSad69" />
+          <ScalarProperty Name="Utm" ColumnName="Utm" />
+          <ScalarProperty Name="Easting" ColumnName="Easting" />
+          <ScalarProperty Name="Northing" ColumnName="Northing" />
+          <ScalarProperty Name="TamperingIsOpen" ColumnName="TamperingIsOpen" />
+          <ScalarProperty Name="InternalAlarm" ColumnName="InternalAlarm" />
+          <ScalarProperty Name="AccessoryMissing" ColumnName="AccessoryMissing" />
+          <ScalarProperty Name="DetailedSupply" ColumnName="DetailedSupply" />
+          <ScalarProperty Name="Ad4" ColumnName="Ad4" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+          <ScalarProperty Name="PointAnalise" ColumnName="PointAnalise" />
+          <ScalarProperty Name="AccessoryCount" ColumnName="AccessoryCount" />
+          <ScalarProperty Name="BatteryCharging" ColumnName="BatteryCharging" />
+          <ScalarProperty Name="BatteryFailure" ColumnName="BatteryFailure" />
+          <ScalarProperty Name="PointId" ColumnName="PointId" />
+          <ScalarProperty Name="PointIn" ColumnName="PointIn" />
+          <ScalarProperty Name="PointOut" ColumnName="PointOut" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DadoGSMs">
+      <EntityTypeMapping TypeName="IsTypeOf(GoTracker.DadoGSM)">
+        <MappingFragment StoreEntitySet="DadoGSMs">
+          <ScalarProperty Name="idDadoGSM" ColumnName="idDadoGSM" />
+          <ScalarProperty Name="idDadoLido" ColumnName="idDadoLido" />
+          <ScalarProperty Name="DadoSerial" ColumnName="DadoSerial" />
+          <ScalarProperty Name="DadoLAC" ColumnName="DadoLAC" />
+          <ScalarProperty Name="DadoMNC" ColumnName="DadoMNC" />
+          <ScalarProperty Name="DadoMCC" ColumnName="DadoMCC" />
+          <ScalarProperty Name="DadoCellId" ColumnName="DadoCellId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DadoLidoes">
+      <EntityTypeMapping TypeName="IsTypeOf(GoTracker.DadoLido)">
+        <MappingFragment StoreEntitySet="DadoLidoes">
+          <ScalarProperty Name="idDadoLido" ColumnName="idDadoLido" />
+          <ScalarProperty Name="Serial" ColumnName="Serial" />
+          <ScalarProperty Name="Protocol" ColumnName="Protocol" />
+          <ScalarProperty Name="MemoryIndex" ColumnName="MemoryIndex" />
+          <ScalarProperty Name="Hourmeter" ColumnName="Hourmeter" />
+          <ScalarProperty Name="PacketReason" ColumnName="PacketReason" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="GprsConn" ColumnName="GprsConn" />
+          <ScalarProperty Name="GpsSignal" ColumnName="GpsSignal" />
+          <ScalarProperty Name="GpsAntFail" ColumnName="GpsAntFail" />
+          <ScalarProperty Name="GpsAntDisc" ColumnName="GpsAntDisc" />
+          <ScalarProperty Name="GpsSleep" ColumnName="GpsSleep" />
+          <ScalarProperty Name="GsmJamming" ColumnName="GsmJamming" />
+          <ScalarProperty Name="Moving" ColumnName="Moving" />
+          <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+          <ScalarProperty Name="PowerSupply" ColumnName="PowerSupply" />
+          <ScalarProperty Name="Ignition" ColumnName="Ignition" />
+          <ScalarProperty Name="Panic" ColumnName="Panic" />
+          <ScalarProperty Name="Inputs" ColumnName="Inputs" />
+          <ScalarProperty Name="Outputs" ColumnName="Outputs" />
+          <ScalarProperty Name="AnalogInputs" ColumnName="AnalogInputs" />
+          <ScalarProperty Name="BatteryUsed" ColumnName="BatteryUsed" />
+          <ScalarProperty Name="AntiTheftStatus" ColumnName="AntiTheftStatus" />
+          <ScalarProperty Name="Hodometer" ColumnName="Hodometer" />
+          <ScalarProperty Name="Rpm" ColumnName="Rpm" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="AccessoryExists" ColumnName="AccessoryExists" />
+          <ScalarProperty Name="OpenDataExists" ColumnName="OpenDataExists" />
+          <ScalarProperty Name="Ipv4" ColumnName="Ipv4" />
+          <ScalarProperty Name="GenerationDate" ColumnName="GenerationDate" />
+          <ScalarProperty Name="PacketSize" ColumnName="PacketSize" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DadoLivres">
+      <EntityTypeMapping TypeName="IsTypeOf(GoTracker.DadoLivre)">
+        <MappingFragment StoreEntitySet="DadoLivres">
+          <ScalarProperty Name="idDadoLivre" ColumnName="idDadoLivre" />
+          <ScalarProperty Name="idDadoLido" ColumnName="idDadoLido" />
+          <ScalarProperty Name="DadoSerial" ColumnName="DadoSerial" />
+          <ScalarProperty Name="DadoString" ColumnName="DadoString" />
+          <ScalarProperty Name="DadoDH" ColumnName="DadoDH" />
+          <ScalarProperty Name="DadoDHS" ColumnName="DadoDHS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DadoSatelites">
+      <EntityTypeMapping TypeName="IsTypeOf(GoTracker.DadoSatelite)">
+        <MappingFragment StoreEntitySet="DadoSatelites">
+          <ScalarProperty Name="idDadoSatelite" ColumnName="idDadoSatelite" />
+          <ScalarProperty Name="idDadoLido" ColumnName="idDadoLido" />
+          <ScalarProperty Name="DadoSerial" ColumnName="DadoSerial" />
+          <ScalarProperty Name="DadoCSQ" ColumnName="DadoCSQ" />
+          <ScalarProperty Name="DadoSVN" ColumnName="DadoSVN" />
+          <ScalarProperty Name="DadoSNR" ColumnName="DadoSNR" />
+          <ScalarProperty Name="DadoHDOP" ColumnName="DadoHDOP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ultimo_DadoLido">
+      <EntityTypeMapping TypeName="IsTypeOf(GoTracker.Ultimo_DadoLido)">
+        <MappingFragment StoreEntitySet="Ultimo_DadoLido">
+          <ScalarProperty Name="idUltimoDadoLido" ColumnName="idUltimoDadoLido" />
+          <ScalarProperty Name="Serial" ColumnName="Serial" />
+          <ScalarProperty Name="Protocol" ColumnName="Protocol" />
+          <ScalarProperty Name="MemoryIndex" ColumnName="MemoryIndex" />
+          <ScalarProperty Name="Hourmeter" ColumnName="Hourmeter" />
+          <ScalarProperty Name="PacketReason" ColumnName="PacketReason" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="GprsConn" ColumnName="GprsConn" />
+          <ScalarProperty Name="GpsSignal" ColumnName="GpsSignal" />
+          <ScalarProperty Name="GpsAntFail" ColumnName="GpsAntFail" />
+          <ScalarProperty Name="GpsAntDisc" ColumnName="GpsAntDisc" />
+          <ScalarProperty Name="GpsSleep" ColumnName="GpsSleep" />
+          <ScalarProperty Name="GsmJamming" ColumnName="GsmJamming" />
+          <ScalarProperty Name="Moving" ColumnName="Moving" />
+          <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+          <ScalarProperty Name="PowerSupply" ColumnName="PowerSupply" />
+          <ScalarProperty Name="Ignition" ColumnName="Ignition" />
+          <ScalarProperty Name="Panic" ColumnName="Panic" />
+          <ScalarProperty Name="Inputs" ColumnName="Inputs" />
+          <ScalarProperty Name="Outputs" ColumnName="Outputs" />
+          <ScalarProperty Name="AnalogInputs" ColumnName="AnalogInputs" />
+          <ScalarProperty Name="BatteryUsed" ColumnName="BatteryUsed" />
+          <ScalarProperty Name="AntiTheftStatus" ColumnName="AntiTheftStatus" />
+          <ScalarProperty Name="Hodometer" ColumnName="Hodometer" />
+          <ScalarProperty Name="Rpm" ColumnName="Rpm" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="AccessoryExists" ColumnName="AccessoryExists" />
+          <ScalarProperty Name="OpenDataExists" ColumnName="OpenDataExists" />
+          <ScalarProperty Name="Ipv4" ColumnName="Ipv4" />
+          <ScalarProperty Name="GenerationDate" ColumnName="GenerationDate" />
+          <ScalarProperty Name="PacketSize" ColumnName="PacketSize" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
